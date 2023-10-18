@@ -9,6 +9,8 @@ import ProductCard from "./ProductCard";
 import ProductDetailsCarousel from "./ProductDetailsCarousel";
 import RelatedProducts from "./RelatedProducts";
 import CartItem from "./CartItem";
+import NewsLetter from "./NewsLetter";
+import Announcement from "./Announcement";
 
 export {
   Header,
@@ -22,4 +24,6 @@ export {
   ProductDetailsCarousel,
   RelatedProducts,
   CartItem,
+  NewsLetter,
+  Announcement,
 };
