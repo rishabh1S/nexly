@@ -10,6 +10,7 @@ import { IoMdHeartEmpty } from "react-icons/io";
 import { BsCart } from "react-icons/bs";
 import { BiMenuAltRight } from "react-icons/bi";
 import { VscChromeClose } from "react-icons/vsc";
+import { AiOutlineUser } from "react-icons/ai";
 // import { fetchDataFromApi } from "@/utils/api";
 import { useSelector } from "react-redux";
 
@@ -78,6 +79,10 @@ const Header = () => {
               </div>
             </div>
           </Link>
+
+          <div className="w-8 md:w-12 h-8 md:h-12 rounded-full flex justify-center items-center hover:bg-black/[0.05] cursor-pointer relative">
+            <AiOutlineUser className="text-[19px] md:text-[24px]" />
+          </div>
 
           <div className="w-8 md:w-12 h-8 md:h-12 rounded-full flex md:hidden justify-center items-center hover:bg-black/[0.05] cursor-pointer relative -mr-2">
             {mobileMenu ? (

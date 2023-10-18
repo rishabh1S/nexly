@@ -4,7 +4,7 @@ import React from "react";
 
 const Categories: React.FC = () => {
   return (
-    <div className="flex h-[80vh] gap-[10px] m-[10px]">
+    <div className="flex sm:flex-row flex-col sm:h-[80vh] h-full gap-[10px] m-[10px]">
       <div className="flex-1 flex flex-col gap-[10px]">
         <div className="flex-1 flex gap-[10px] relative overflow-hidden">
           <img
@@ -46,7 +46,7 @@ const Categories: React.FC = () => {
           </button>
         </div>
       </div>
-      <div className="flex-1 flex flex-col gap-[10px] flex-2">
+      <div className="flex-2 flex flex-col gap-[10px]">
         <div className="flex-1 flex gap-[10px] relative overflow-hidden">
           <div className="flex-1 flex flex-col gap-[10px]">
             <div className="flex-1 flex gap-[10px] relative overflow-hidden">
