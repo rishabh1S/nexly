@@ -1,4 +1,5 @@
 import React from "react";
+import Image from "next/image";
 import { FaXTwitter, FaYoutube, FaInstagram, FaDiscord } from "react-icons/fa6";
 import Wrapper from "./Wrapper";
 import Link from "next/link";
@@ -79,30 +80,40 @@ const Footer = () => {
         {/* LEFT END */}
 
         {/* RIGHT START */}
-        <div className="flex gap-4 justify-center md:justify-start">
-          <Link
-            href="https://twitter.com/Rishabh1xs"
-            target="_blank"
-            className="w-10 h-10 rounded-full bg-white/[0.25] flex items-center justify-center text-black hover:bg-white/[0.5] cursor-pointer"
-          >
-            <FaXTwitter size={20} />
-          </Link>
-          <Link
-            href="https://youtube.com/@rishabh1s"
-            target="_blank"
-            className="w-10 h-10 rounded-full bg-white/[0.25] flex items-center justify-center text-black hover:bg-white/[0.5] cursor-pointer"
-          >
-            <FaYoutube size={20} />
-          </Link>
-          <Link
-            href="https://www.instagram.com/rishabh1s/"
-            target="_blank"
-            className="w-10 h-10 rounded-full bg-white/[0.25] flex items-center justify-center text-black hover:bg-white/[0.5] cursor-pointer"
-          >
-            <FaInstagram size={20} />
-          </Link>
-          <div className="w-10 h-10 rounded-full bg-white/[0.25] flex items-center justify-center text-black hover:bg-white/[0.5] cursor-pointer">
-            <FaDiscord size={20} />
+        <div className="flex flex-col justify-between items-center gap-4">
+          <div className="flex gap-4 justify-center md:justify-start">
+            <Link
+              href="https://twitter.com/Rishabh1xs"
+              target="_blank"
+              className="w-10 h-10 rounded-full bg-white/[0.25] flex items-center justify-center text-black hover:bg-white/[0.5] cursor-pointer"
+            >
+              <FaXTwitter size={20} />
+            </Link>
+            <Link
+              href="https://youtube.com/@rishabh1s"
+              target="_blank"
+              className="w-10 h-10 rounded-full bg-white/[0.25] flex items-center justify-center text-black hover:bg-white/[0.5] cursor-pointer"
+            >
+              <FaYoutube size={20} />
+            </Link>
+            <Link
+              href="https://www.instagram.com/rishabh1s/"
+              target="_blank"
+              className="w-10 h-10 rounded-full bg-white/[0.25] flex items-center justify-center text-black hover:bg-white/[0.5] cursor-pointer"
+            >
+              <FaInstagram size={20} />
+            </Link>
+            <div className="w-10 h-10 rounded-full bg-white/[0.25] flex items-center justify-center text-black hover:bg-white/[0.5] cursor-pointer">
+              <FaDiscord size={20} />
+            </div>
+          </div>
+          <div>
+            <Image
+              src="/payment.png"
+              alt="payment methods"
+              width={500}
+              height={500}
+            />
           </div>
         </div>
         {/* RIGHT END */}

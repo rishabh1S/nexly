@@ -6,6 +6,9 @@ import MenuMobile from "./MenuMobile";
 import HeroBanner from "./HeroBanner";
 import Categories from "./Categories";
 import ProductCard from "./ProductCard";
+import ProductDetailsCarousel from "./ProductDetailsCarousel";
+import RelatedProducts from "./RelatedProducts";
+import CartItem from "./CartItem";
 
 export {
   Header,
@@ -16,4 +19,7 @@ export {
   HeroBanner,
   Categories,
   ProductCard,
+  ProductDetailsCarousel,
+  RelatedProducts,
+  CartItem,
 };
