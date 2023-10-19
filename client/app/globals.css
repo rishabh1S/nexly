@@ -168,6 +168,11 @@ body::-webkit-scrollbar {
   font-weight: 500;
 }
 
+.cat-button:hover {
+  transform: scale(1.10);
+  transition: transform 0.3s ease;
+}
+
 .flex-2{
   flex: 2;
 }

@@ -51,7 +51,7 @@ const Menu: React.FC<MenuProps> = ({
                           href={`/category/${c.name.toLowerCase()}`}
                           onClick={() => setShowCatMenu(false)}
                         >
-                          <li className="h-12 flex justify-between items-center px-3 hover:bg-black-[0.03] rounded-md">
+                          <li className="h-12 flex justify-between items-center px-3 hover:bg-black/[0.03] rounded-md">
                             {c.name}
                             <span className="opacity-50 text-sm">
                               {`(${c.doc_count})`}

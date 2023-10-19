@@ -4,7 +4,7 @@
 import React, { useState, useEffect } from "react";
 import { Menu, MenuMobile, Wrapper } from ".";
 import Link from "next/link";
-import { Category } from "./types";
+import { Category, MenuItem } from "./types";
 
 import { IoMdHeartEmpty } from "react-icons/io";
 import { BsCart } from "react-icons/bs";
@@ -14,9 +14,16 @@ import { AiOutlineUser } from "react-icons/ai";
 // import { fetchDataFromApi } from "@/utils/api";
 import { useSelector } from "react-redux";
 
+const data: MenuItem[] = [
+  { id: 1, name: "Profile", url: "" },
+  { id: 2, name: "Contact", url: "/contact" },
+  { id: 3, name: "Sign Out", url: "" },
+];
+
 const Header = () => {
   const [mobileMenu, setMobileMenu] = useState(false);
   const [showCatMenu, setShowCatMenu] = useState(false);
+  const [userMenuOpen, setUserMenuOpen] = useState(false);
   const [show, setShow] = useState("translate-y-0");
   const [lastScrollY, setLastScrollY] = useState(0);
   const [categories, setCategories] = useState<Category[]>([]);
@@ -66,7 +73,7 @@ const Header = () => {
         <div className="flex items-center gap-2 text-black">
           <div className="w-8 md:w-12 h-8 md:h-12 rounded-full flex justify-center items-center hover:bg-black/[0.05] cursor-pointer relative">
             <IoMdHeartEmpty className="text-[19px] md:text-[24px]" />
-            <div className="h-[14px] md:h-[18px] min-w-[14px] md:min-w-[18px] rounded-full bg-red-600 absolute top-1 left-5 md:left-7 text-white text-[10px] md:text-[12px] flex justify-center items-center px-[2px] md:px-[5px]">
+            <div className="h-[14px] md:h-[18px] min-w-[14px] md:min-w-[18px] rounded-full bg-violet-500 absolute top-1 left-5 md:left-7 text-white text-[10px] md:text-[12px] flex justify-center items-center px-[2px] md:px-[5px]">
               21
             </div>
           </div>
@@ -74,14 +81,32 @@ const Header = () => {
           <Link href="/cart">
             <div className="w-8 md:w-12 h-8 md:h-12 rounded-full flex justify-center items-center hover:bg-black/[0.05] cursor-pointer relative">
               <BsCart className="text-[15px] md:text-[20px]" />
-              <div className="h-[14px] md:h-[18px] min-w-[14px] md:min-w-[18px] rounded-full bg-red-600 absolute top-1 left-5 md:left-7 text-white text-[10px] md:text-[12px] flex justify-center items-center px-[2px] md:px-[5px]">
+              <div className="h-[14px] md:h-[18px] min-w-[14px] md:min-w-[18px] rounded-full bg-violet-500 absolute top-1 left-5 md:left-7 text-white text-[10px] md:text-[12px] flex justify-center items-center px-[2px] md:px-[5px]">
                 3
               </div>
             </div>
           </Link>
 
-          <div className="w-8 md:w-12 h-8 md:h-12 rounded-full flex justify-center items-center hover:bg-black/[0.05] cursor-pointer relative">
+          <div
+            className="w-8 md:w-12 h-8 md:h-12 rounded-full hidden md:flex justify-center items-center hover:bg-black/[0.05] cursor-pointer relative"
+            onMouseEnter={() => setUserMenuOpen(true)}
+            onMouseLeave={() => setUserMenuOpen(false)}
+          >
             <AiOutlineUser className="text-[19px] md:text-[24px]" />
+            {userMenuOpen && (
+              <div className="bg-white absolute top-12 right-0 min-w-[150px] px-1 py-1 text-black shadow-lg">
+                {data.map((item) => (
+                  <Link
+                    key={item.id}
+                    href={item.url || "#"}
+                    className="block px-4 py-2 hover:bg-black/[0.03] rounded-md"
+                    onClick={() => setUserMenuOpen(false)}
+                  >
+                    {item.name}
+                  </Link>
+                ))}
+              </div>
+            )}
           </div>
 
           <div className="w-8 md:w-12 h-8 md:h-12 rounded-full flex md:hidden justify-center items-center hover:bg-black/[0.05] cursor-pointer relative -mr-2">

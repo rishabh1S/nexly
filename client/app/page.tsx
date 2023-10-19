@@ -1,3 +1,5 @@
+"use client";
+
 import Image from "next/image";
 import {
   HeroBanner,
@@ -6,7 +8,9 @@ import {
   ProductCard,
   NewsLetter,
   Announcement,
+  AuthenticationModal,
 } from "@/components";
+import { useState } from "react";
 
 export default function Home() {
   return (
@@ -14,7 +18,7 @@ export default function Home() {
       <Announcement />
       <HeroBanner />
       <Wrapper>
-        <div className="text-center max-w-[800px] mx-auto my-[50px] md:my-[80px]">
+        <div className="text-center max-w-[800px] mx-auto my-10 md:my-14">
           <div className="text-[30px] md:text-[40px] mb-5 font-semibold leading-tight">
             Experience Exceptional Style and Unrivaled Quality
           </div>
@@ -39,7 +43,7 @@ export default function Home() {
           <ProductCard />
         </div>
       </Wrapper>
-      <div className="text-center max-w-[800px] mx-auto my-[50px] md:my-[80px]">
+      <div className="text-center max-w-[800px] mx-auto my-10 md:my-14">
         <div className="text-[30px] md:text-[40px] mb-5 font-semibold leading-tight">
           Discover the Finest Collection
         </div>
@@ -52,6 +56,7 @@ export default function Home() {
       </div>
       <Categories />
       <NewsLetter />
+      <AuthenticationModal />
     </main>
   );
 }

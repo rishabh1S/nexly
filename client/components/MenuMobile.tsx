@@ -15,6 +15,7 @@ const data: MenuItem[] = [
   { id: 2, name: "About", url: "/about" },
   { id: 3, name: "Categories", subMenu: true },
   { id: 4, name: "Contact", url: "/contact" },
+  { id: 5, name: "Sign Out", url: "/authentication" },
 ];
 
 const subMenuData: Category[] = [
