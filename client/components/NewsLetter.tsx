@@ -3,7 +3,7 @@ import { MdSend } from "react-icons/md";
 
 const NewsLetter = () => {
   return (
-    <div className="h-[50vh] font-bold bg-[#fcf5f5] flex flex-col items-center justify-center">
+    <div className="h-[50vh] font-bold bg-[#fcf5f5] flex flex-col items-center justify-center m-[10px]">
       <h1 className="text-[30px] md:text-[40px] font-semibold leading-tight">
         Newsletter
       </h1>

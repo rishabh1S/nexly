@@ -17,7 +17,10 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className={`${oswald.className} ${urbanist.className}`}>
+      <body
+        suppressHydrationWarning={true}
+        className={`${oswald.className} ${urbanist.className}`}
+      >
         <Header />
         {children}
         <Footer />

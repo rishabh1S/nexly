@@ -5,7 +5,7 @@ import React from "react";
 import Link from "next/link";
 import "react-responsive-carousel/lib/styles/carousel.min.css";
 import { Carousel } from "react-responsive-carousel";
-import { CarouselItem } from "./types";
+import { CarouselItem } from "../utils/types";
 
 const subMenuData: CarouselItem[] = [
   {

@@ -11,10 +11,12 @@ import {
   AuthenticationModal,
 } from "@/components";
 import { useState } from "react";
+import { Toaster } from "sonner";
 
 export default function Home() {
   return (
     <main className="min-h-screen">
+      <Toaster richColors position="top-center" closeButton />
       <Announcement />
       <HeroBanner />
       <Wrapper>

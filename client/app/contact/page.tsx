@@ -1,18 +1,37 @@
 "use client";
 
 import React, { useState } from "react";
+import supabase from "@/utils/supabase";
+import { Toaster, toast } from "sonner";
 
 const Contact: React.FC = () => {
   const [email, setEmail] = useState("");
   const [subject, setSubject] = useState("");
   const [message, setMessage] = useState("");
 
-  const submitForm = () => {
-    // Handle form submission here
+  const submitForm = async (e: React.FormEvent) => {
+    e.preventDefault();
+    const { data, error } = await supabase.from("contact").upsert([
+      {
+        email,
+        subject,
+        message,
+      },
+    ]);
+    if (error) {
+      console.error("Error saving data:", error);
+      toast.error("Something went wrong, while submitting form");
+    } else {
+      toast.success("Form submitted successfully!");
+      setEmail("");
+      setSubject("");
+      setMessage("");
+    }
   };
 
   return (
     <div className="py-6 px-4 sm:px-6 lg:px-8 mx-auto max-w-screen-md">
+      <Toaster richColors position="top-center" closeButton />
       <h2 className="text-[30px] md:text-[40px] font-semibold text-gray-800 mb-4 sm:mb:6 text-center">
         Contact Us
       </h2>
@@ -77,7 +96,7 @@ const Contact: React.FC = () => {
         </div>
         <button
           type="submit"
-          className="py-3 px-5 text-sm font-medium text-center text-white rounded-lg bg-violet-600 sm:w-fit hover:bg-violet-500 focus:ring-4 focus:outline-none focus:ring-green-300"
+          className="py-3 px-5 text-sm font-medium text-center text-white rounded-lg bg-violet-600 sm:w-fit hover:bg-violet-500 focus:ring-4 focus:outline-none focus:ring-violet-300"
         >
           Send message
         </button>

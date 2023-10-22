@@ -1,11 +1,14 @@
+/* eslint-disable @next/next/no-img-element */
 /* eslint-disable react-hooks/exhaustive-deps */
 "use client";
 
 import React, { useState, useEffect } from "react";
-import { Menu, MenuMobile, Wrapper } from ".";
+import { Menu, MenuMobile, Wrapper, AuthenticationModal } from ".";
 import Link from "next/link";
-import { Category, MenuItem } from "./types";
-
+import { Category, MenuItem } from "../utils/types";
+import { handleSignOut } from "@/utils/supabase";
+import { usePathname } from "next/navigation";
+import supabase from "../utils/supabase";
 import { IoMdHeartEmpty } from "react-icons/io";
 import { BsCart } from "react-icons/bs";
 import { BiMenuAltRight } from "react-icons/bi";
@@ -14,12 +17,6 @@ import { AiOutlineUser } from "react-icons/ai";
 // import { fetchDataFromApi } from "@/utils/api";
 import { useSelector } from "react-redux";
 
-const data: MenuItem[] = [
-  { id: 1, name: "Profile", url: "" },
-  { id: 2, name: "Contact", url: "/contact" },
-  { id: 3, name: "Sign Out", url: "" },
-];
-
 const Header = () => {
   const [mobileMenu, setMobileMenu] = useState(false);
   const [showCatMenu, setShowCatMenu] = useState(false);
@@ -27,6 +24,9 @@ const Header = () => {
   const [show, setShow] = useState("translate-y-0");
   const [lastScrollY, setLastScrollY] = useState(0);
   const [categories, setCategories] = useState<Category[]>([]);
+  const [full_name, setFullName] = useState("");
+  const [avatar_url, setAvatarUrl] = useState("");
+  const pathname = usePathname();
 
   const controlNavbar = () => {
     if (window.scrollY > 200) {
@@ -41,12 +41,41 @@ const Header = () => {
     setLastScrollY(window.scrollY);
   };
   useEffect(() => {
+    getProfile();
     window.addEventListener("scroll", controlNavbar);
     return () => {
       window.removeEventListener("scroll", controlNavbar);
     };
   }, [lastScrollY]);
 
+  const handleReloadPage = () => {
+    if (pathname === "/") {
+      window.location.reload();
+    }
+  };
+
+  const getProfile = async () => {
+    try {
+      const response = await supabase.auth.getUser();
+      const user = response.data?.user;
+      if (user) {
+        const { data, error, status } = await supabase
+          .from("profiles")
+          .select(`full_name, avatar_url`)
+          .eq("id", user.id)
+          .single();
+
+        if (data) {
+          setFullName(data.full_name);
+          setAvatarUrl(data.avatar_url);
+        }
+      }
+    } catch (error) {
+      console.log("Something went wrong: ", error);
+    }
+  };
+
+  // const user = checkAuthStatus();
   return (
     <div
       className={`w-full h-[50px] md:h-[80px] bg-white flex items-center justify-between z-20 sticky top-0 transition-transform duration-300 ${show}`}
@@ -88,23 +117,44 @@ const Header = () => {
           </Link>
 
           <div
-            className="w-8 md:w-12 h-8 md:h-12 rounded-full hidden md:flex justify-center items-center hover:bg-black/[0.05] cursor-pointer relative"
+            className="w-8 md:w-12 h-8 md:h-12 rounded-full hidden md:flex justify-center items-center cursor-pointer relative"
             onMouseEnter={() => setUserMenuOpen(true)}
             onMouseLeave={() => setUserMenuOpen(false)}
           >
-            <AiOutlineUser className="text-[19px] md:text-[24px]" />
+            {avatar_url ? (
+              <img
+                src={avatar_url}
+                alt="User Avatar"
+                className="w-10 h-10 rounded-full"
+              />
+            ) : (
+              <AiOutlineUser className="text-[19px] md:text-[24px]" />
+            )}
             {userMenuOpen && (
-              <div className="bg-white absolute top-12 right-0 min-w-[150px] px-1 py-1 text-black shadow-lg">
-                {data.map((item) => (
-                  <Link
-                    key={item.id}
-                    href={item.url || "#"}
-                    className="block px-4 py-2 hover:bg-black/[0.03] rounded-md"
-                    onClick={() => setUserMenuOpen(false)}
-                  >
-                    {item.name}
-                  </Link>
-                ))}
+              <div className="bg-white absolute top-11 right-0 min-w-[160px] px-1 py-1 text-black shadow-lg">
+                <div className="block px-4 py-2 hover:bg-black/[0.03] rounded-md">
+                  {full_name || "Profile"}
+                </div>
+                <Link
+                  href="/contact"
+                  className="block px-4 py-2 hover:bg-black/[0.03] rounded-md"
+                  onClick={() => {
+                    setUserMenuOpen(false);
+                  }}
+                >
+                  Contact
+                </Link>
+                <Link
+                  href="/"
+                  className="block px-4 py-2 hover:bg-black/[0.03] rounded-md"
+                  onClick={() => {
+                    handleSignOut();
+                    handleReloadPage();
+                    setUserMenuOpen(false);
+                  }}
+                >
+                  Sign Out
+                </Link>
               </div>
             )}
           </div>
