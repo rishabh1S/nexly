@@ -122,7 +122,7 @@ const Registration: React.FC = () => {
                   type="submit"
                   className="w-full text-white bg-violet-700 hover:bg-violet-800 focus:ring-4 focus:outline-none focus:ring-violet-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center"
                 >
-                  Login to your account
+                  Sign up
                 </button>
                 <div className="text-sm font-medium text-gray-500">
                   Already registered?

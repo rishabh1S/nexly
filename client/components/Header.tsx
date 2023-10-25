@@ -6,8 +6,7 @@ import React, { useState, useEffect } from "react";
 import { Menu, MenuMobile, Wrapper } from ".";
 import Link from "next/link";
 import { Category, MenuItem } from "../utils/types";
-import { handleSignOut, checkAuthStatus } from "@/utils/supabase";
-import { usePathname } from "next/navigation";
+import { handleSignOut } from "@/utils/supabase";
 import supabase from "../utils/supabase";
 import { IoMdHeartEmpty } from "react-icons/io";
 import { BsCart } from "react-icons/bs";
@@ -26,7 +25,6 @@ const Header = () => {
   const [categories, setCategories] = useState<Category[]>([]);
   const [full_name, setFullName] = useState("");
   const [avatar_url, setAvatarUrl] = useState("");
-  const pathname = usePathname();
 
   const controlNavbar = () => {
     if (window.scrollY > 200) {

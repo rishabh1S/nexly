@@ -8,38 +8,41 @@ import {
   NewsLetter,
   Announcement,
 } from "@/components";
-import { useState, useEffect, useCallback } from "react";
+import { useEffect, useCallback, useState } from "react";
 import { Toaster } from "sonner";
 import { fetchDataFromApi } from "@/utils/api";
 import { checkAuthStatus } from "@/utils/supabase";
 import { useRouter } from "next/navigation";
+import { Product } from "@/utils/types";
 
 export default function Home() {
-  const [data, setData] = useState(null);
+  const [data, setData] = useState<Product[]>([]);
   const router = useRouter();
+
+  useEffect(() => {
+    checkStatus();
+    fetchData();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   const checkStatus = useCallback(async () => {
     const user = await checkAuthStatus();
+
     if (!user) {
       router.push("/login");
     }
   }, [router]);
 
-  useEffect(() => {
-    checkStatus();
-    fetchProducts();
-  }, [checkStatus]);
-
-  const fetchProducts = async () => {
-    const { data } = await fetchDataFromApi("/api/products");
+  const fetchData = async () => {
+    const { data } = await fetchDataFromApi("/api/products?populate=*");
     setData(data);
   };
+
   return (
     <main className="min-h-screen">
       <Toaster richColors position="top-center" closeButton />
       <Announcement />
       <HeroBanner />
-      <h1>{data?.[0]?.attributes?.name}</h1>
       <Wrapper>
         <div className="text-center max-w-[800px] mx-auto my-10 md:my-14">
           <div className="text-[30px] md:text-[40px] mb-5 font-semibold leading-tight">
@@ -54,16 +57,10 @@ export default function Home() {
           </div>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 my-14 px-5 md:px-0">
-          <ProductCard />
-          <ProductCard />
-          <ProductCard />
-          <ProductCard />
-          <ProductCard />
-          <ProductCard />
-          <ProductCard />
-          <ProductCard />
-          <ProductCard />
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5 my-14 px-5 md:px-0">
+          {data.map((product: Product) => (
+            <ProductCard key={product.id} product={product} />
+          ))}
         </div>
       </Wrapper>
       <div className="text-center max-w-[800px] mx-auto my-10 md:my-14">

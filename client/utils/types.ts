@@ -16,3 +16,19 @@ export interface CarouselItem {
   imgSrc: string;
   alt: string;
 }
+
+export interface Product {
+  id: number;
+  attributes: {
+    name: string;
+    price: number;
+    original_price: number;
+    thumbnail: {
+      data: {
+        attributes: {
+          url: string;
+        };
+      };
+    };
+  };
+}

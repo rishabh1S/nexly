@@ -8,7 +8,7 @@ if (!supabaseUrl || !supabaseKey) {
   throw new Error("Supabase URL and API key are required.");
 }
 
-const supabase = createClient(supabaseUrl, supabaseKey);
+export const supabase = createClient(supabaseUrl, supabaseKey);
 
 export const checkAuthStatus = async () => {
   const {

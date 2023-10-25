@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import Link from "next/link";
 import { BsChevronDown } from "react-icons/bs";
 import { Category, MenuItem } from "../utils/types";
+import { handleSignOut } from "@/utils/supabase";
 
 interface MenuMobileProps {
   showCatMenu: boolean;
@@ -15,7 +16,7 @@ const data: MenuItem[] = [
   { id: 2, name: "About", url: "/about" },
   { id: 3, name: "Categories", subMenu: true },
   { id: 4, name: "Contact", url: "/contact" },
-  { id: 5, name: "Sign Out", url: "/authentication" },
+  { id: 5, name: "Sign Out", url: "/login" },
 ];
 
 const subMenuData: Category[] = [
@@ -73,7 +74,15 @@ const MenuMobile: React.FC<MenuMobileProps> = ({
             ) : (
               <li className="py-4 px-5 border-b">
                 {item.url && (
-                  <Link href={item.url} onClick={() => setMobileMenu(false)}>
+                  <Link
+                    href={item.url}
+                    onClick={() => {
+                      if (item.name === "Sign Out") {
+                        handleSignOut();
+                      }
+                      setMobileMenu(false);
+                    }}
+                  >
                     {item.name}
                   </Link>
                 )}

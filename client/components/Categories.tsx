@@ -13,7 +13,7 @@ const Categories: React.FC = () => {
             alt=""
           />
           <button className="cat-button">
-            <Link className="link" href="/Products/1">
+            <Link className="link" href="/category/sale">
               Sale
             </Link>
           </button>
@@ -40,7 +40,7 @@ const Categories: React.FC = () => {
             alt=""
           />
           <button className="cat-button">
-            <Link href="/Products/1" className="link">
+            <Link href="/category/newseason" className="link">
               New Season
             </Link>
           </button>
@@ -56,7 +56,7 @@ const Categories: React.FC = () => {
                 alt=""
               />
               <button className="cat-button">
-                <Link href="/Products/1" className="link">
+                <Link href="/category/men" className="link">
                   Men
                 </Link>
               </button>
@@ -71,7 +71,7 @@ const Categories: React.FC = () => {
                 alt=""
               />
               <button className="cat-button">
-                <Link href="/Products/1" className="link">
+                <Link href="/category/women" className="link">
                   Women
                 </Link>
               </button>
@@ -85,7 +85,7 @@ const Categories: React.FC = () => {
             alt=""
           />
           <button className="cat-button">
-            <Link href="/Products/1" className="link">
+            <Link href="/category/shoes" className="link">
               Shoes
             </Link>
           </button>
