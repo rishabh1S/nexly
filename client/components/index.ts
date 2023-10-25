@@ -11,7 +11,6 @@ import RelatedProducts from "./RelatedProducts";
 import CartItem from "./CartItem";
 import NewsLetter from "./NewsLetter";
 import Announcement from "./Announcement";
-import AuthenticationModal from "./AuthenticationModal";
 
 export {
   Header,
@@ -27,5 +26,4 @@ export {
   CartItem,
   NewsLetter,
   Announcement,
-  AuthenticationModal,
 };

@@ -1,6 +1,5 @@
 "use client";
 
-import Image from "next/image";
 import {
   HeroBanner,
   Categories,
@@ -8,17 +7,39 @@ import {
   ProductCard,
   NewsLetter,
   Announcement,
-  AuthenticationModal,
 } from "@/components";
-import { useState } from "react";
+import { useState, useEffect, useCallback } from "react";
 import { Toaster } from "sonner";
+import { fetchDataFromApi } from "@/utils/api";
+import { checkAuthStatus } from "@/utils/supabase";
+import { useRouter } from "next/navigation";
 
 export default function Home() {
+  const [data, setData] = useState(null);
+  const router = useRouter();
+
+  const checkStatus = useCallback(async () => {
+    const user = await checkAuthStatus();
+    if (!user) {
+      router.push("/login");
+    }
+  }, [router]);
+
+  useEffect(() => {
+    checkStatus();
+    fetchProducts();
+  }, [checkStatus]);
+
+  const fetchProducts = async () => {
+    const { data } = await fetchDataFromApi("/api/products");
+    setData(data);
+  };
   return (
     <main className="min-h-screen">
       <Toaster richColors position="top-center" closeButton />
       <Announcement />
       <HeroBanner />
+      <h1>{data?.[0]?.attributes?.name}</h1>
       <Wrapper>
         <div className="text-center max-w-[800px] mx-auto my-10 md:my-14">
           <div className="text-[30px] md:text-[40px] mb-5 font-semibold leading-tight">
@@ -58,7 +79,6 @@ export default function Home() {
       </div>
       <Categories />
       <NewsLetter />
-      <AuthenticationModal />
     </main>
   );
 }

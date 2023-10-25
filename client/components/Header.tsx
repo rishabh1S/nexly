@@ -3,10 +3,10 @@
 "use client";
 
 import React, { useState, useEffect } from "react";
-import { Menu, MenuMobile, Wrapper, AuthenticationModal } from ".";
+import { Menu, MenuMobile, Wrapper } from ".";
 import Link from "next/link";
 import { Category, MenuItem } from "../utils/types";
-import { handleSignOut } from "@/utils/supabase";
+import { handleSignOut, checkAuthStatus } from "@/utils/supabase";
 import { usePathname } from "next/navigation";
 import supabase from "../utils/supabase";
 import { IoMdHeartEmpty } from "react-icons/io";
@@ -48,12 +48,6 @@ const Header = () => {
     };
   }, [lastScrollY]);
 
-  const handleReloadPage = () => {
-    if (pathname === "/") {
-      window.location.reload();
-    }
-  };
-
   const getProfile = async () => {
     try {
       const response = await supabase.auth.getUser();
@@ -75,7 +69,6 @@ const Header = () => {
     }
   };
 
-  // const user = checkAuthStatus();
   return (
     <div
       className={`w-full h-[50px] md:h-[80px] bg-white flex items-center justify-between z-20 sticky top-0 transition-transform duration-300 ${show}`}
@@ -145,11 +138,10 @@ const Header = () => {
                   Contact
                 </Link>
                 <Link
-                  href="/"
+                  href="/login"
                   className="block px-4 py-2 hover:bg-black/[0.03] rounded-md"
                   onClick={() => {
                     handleSignOut();
-                    handleReloadPage();
                     setUserMenuOpen(false);
                   }}
                 >

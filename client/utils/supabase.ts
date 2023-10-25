@@ -10,9 +10,15 @@ if (!supabaseUrl || !supabaseKey) {
 
 const supabase = createClient(supabaseUrl, supabaseKey);
 
+export const checkAuthStatus = async () => {
+  const {
+    data: { user },
+  } = await supabase.auth.getUser();
+  return user;
+};
+
 export const handleSignOut = async () => {
   const { error } = await supabase.auth.signOut();
-
   if (error) {
     console.error("Error signing out:", error.message);
     toast.error(error.message);
