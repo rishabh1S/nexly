@@ -84,12 +84,12 @@ const Header = () => {
       <Wrapper className="h-[60px] flex justify-between items-center">
         <Link
           href="/"
-          className="font-bold text-2xl flex justify-center items-center"
+          className="font-bold text-2xl flex justify-center items-center gap-2"
         >
-          <div>BuyNext</div>
           <div>
             <Image width={25} height={25} src="/carts.png" alt="logo" />
           </div>
+          <div>BuyNext</div>
         </Link>
         <Menu
           showCatMenu={showCatMenu}

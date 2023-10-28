@@ -46,13 +46,15 @@ export default function Home() {
       <Toaster richColors position="top-center" closeButton />
       <Announcement />
       <HeroBanner />
-      <Wrapper className="min-h-screen">
+      <Wrapper>
         {loading ? (
-          <div className="text-2xl w-full h-full bg-white/[0.5] flex justify-center items-center gap-6">
-            <div>
-              <Image width={50} height={50} src="/carts.png" alt="logo" />
+          <div className="min-h-screen">
+            <div className="text-2xl fixed inset-0 bg-white/[0.5] flex justify-center items-center gap-4">
+              <div>
+                <Image width={50} height={50} src="/carts.png" alt="logo" />
+              </div>
+              Loading ...
             </div>
-            Loading ...
           </div>
         ) : (
           <div>

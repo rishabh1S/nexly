@@ -36,9 +36,25 @@ export interface Product {
   attributes: {
     categories: any;
     name: string;
+    subtitle: string;
+    description: string;
     price: number;
     original_price: number;
     slug: string;
+    size: {
+      data: {
+        size: string;
+        enabled: boolean;
+      }[];
+    };
+    image: {
+      data: {
+        id: number;
+        attributes: {
+          url: string;
+        };
+      };
+    };
     thumbnail: {
       data: {
         attributes: {

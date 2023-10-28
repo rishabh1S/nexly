@@ -1,6 +1,6 @@
 "use client";
 import React, { useEffect, useState } from "react";
-import { Wrapper, ProductCard } from "@/components";
+import { Wrapper, ProductCard, Announcement } from "@/components";
 import { Product } from "@/utils/types";
 import { fetchDataFromApi } from "@/utils/api";
 import { useParams } from "next/navigation";
@@ -31,10 +31,11 @@ const Category = () => {
   };
 
   return (
-    <div className="w-full md:py-20 relative min-h-screen">
-      <Wrapper>
+    <div className="w-full relative min-h-screen">
+      <Announcement />
+      <Wrapper className="md:py-16 py-4">
         {loading ? (
-          <div className="text-2xl fixed inset-0 z-50 flex justify-center items-center gap-6">
+          <div className="text-2xl fixed inset-0 bg-white/[0.5] flex justify-center items-center gap-4">
             <div>
               <Image width={50} height={50} src="/carts.png" alt="logo" />
             </div>
