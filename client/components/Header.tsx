@@ -5,6 +5,7 @@
 import React, { useState, useEffect } from "react";
 import { Menu, MenuMobile, Wrapper } from ".";
 import Link from "next/link";
+import Image from "next/image";
 import { Category, MenuItem } from "../utils/types";
 import { handleSignOut } from "@/utils/supabase";
 import supabase from "../utils/supabase";
@@ -13,7 +14,7 @@ import { BsCart } from "react-icons/bs";
 import { BiMenuAltRight } from "react-icons/bi";
 import { VscChromeClose } from "react-icons/vsc";
 import { AiOutlineUser } from "react-icons/ai";
-// import { fetchDataFromApi } from "@/utils/api";
+import { fetchDataFromApi } from "@/utils/api";
 import { useSelector } from "react-redux";
 
 const Header = () => {
@@ -46,6 +47,15 @@ const Header = () => {
     };
   }, [lastScrollY]);
 
+  useEffect(() => {
+    fetchCategories();
+  }, []);
+
+  const fetchCategories = async () => {
+    const { data } = await fetchDataFromApi("/api/categories?populate=*");
+    setCategories(data);
+  };
+
   const getProfile = async () => {
     try {
       const response = await supabase.auth.getUser();
@@ -72,8 +82,14 @@ const Header = () => {
       className={`w-full h-[50px] md:h-[80px] bg-white flex items-center justify-between z-20 sticky top-0 transition-transform duration-300 ${show}`}
     >
       <Wrapper className="h-[60px] flex justify-between items-center">
-        <Link href="/" className="font-bold text-2xl">
-          BuyNext
+        <Link
+          href="/"
+          className="font-bold text-2xl flex justify-center items-center"
+        >
+          <div>BuyNext</div>
+          <div>
+            <Image width={25} height={25} src="/carts.png" alt="logo" />
+          </div>
         </Link>
         <Menu
           showCatMenu={showCatMenu}

@@ -3,32 +3,60 @@ import React, { useEffect, useState } from "react";
 import { Wrapper, ProductCard } from "@/components";
 import { Product } from "@/utils/types";
 import { fetchDataFromApi } from "@/utils/api";
+import { useParams } from "next/navigation";
+import Image from "next/image";
 
 const Category = () => {
   const [data, setData] = useState<Product[]>([]);
+  const [loading, setLoading] = useState(true);
+  const { slug } = useParams();
 
   useEffect(() => {
-    fetchData();
-  }, []);
+    if (slug) {
+      fetchData(slug.toString());
+    }
+  }, [slug]);
 
-  const fetchData = async () => {
+  const fetchData = async (categorySlug: string) => {
     const { data } = await fetchDataFromApi("/api/products?populate=*");
-    setData(data);
+    const filteredData = data.filter((product: Product) => {
+      const categories = product.attributes.categories.data;
+      return categories.some(
+        (category: { attributes: { slug: string } }) =>
+          category.attributes.slug === categorySlug
+      );
+    });
+    setData(filteredData);
+    setLoading(false);
   };
-  return (
-    <div className="w-full md:py-20 relative">
-      <Wrapper>
-        <div className="text-center max-w-[800px] mx-auto mt-8 md:mt-0">
-          <div className="text-[28px] md:text-[34px] mb-5 font-semibold leading-tight">
-            Men
-          </div>
-        </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5 my-14 px-5 md:px-0">
-          {data.map((product: Product) => (
-            <ProductCard key={product.id} product={product} />
-          ))}
-        </div>
+  return (
+    <div className="w-full md:py-20 relative min-h-screen">
+      <Wrapper>
+        {loading ? (
+          <div className="text-2xl fixed inset-0 z-50 flex justify-center items-center gap-6">
+            <div>
+              <Image width={50} height={50} src="/carts.png" alt="logo" />
+            </div>
+            Loading ...
+          </div>
+        ) : (
+          <div>
+            <div className="text-center max-w-[800px] mx-auto mt-8 md:mt-0">
+              <div className="text-[28px] md:text-[34px] mb-5 font-semibold leading-tight">
+                {Array.isArray(slug)
+                  ? slug[0].charAt(0).toUpperCase() + slug[0].slice(1)
+                  : slug.charAt(0).toUpperCase() + slug.slice(1)}
+              </div>
+            </div>
+
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5 my-14 px-5 md:px-0">
+              {data.map((product: Product) => (
+                <ProductCard key={product.id} product={product} />
+              ))}
+            </div>
+          </div>
+        )}
       </Wrapper>
     </div>
   );

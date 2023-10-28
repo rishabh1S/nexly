@@ -19,13 +19,6 @@ const data: MenuItem[] = [
   { id: 5, name: "Sign Out", url: "/login" },
 ];
 
-const subMenuData: Category[] = [
-  { id: 1, name: "Men", doc_count: 11 },
-  { id: 2, name: "Women", doc_count: 8 },
-  { id: 3, name: "Accessories", doc_count: 64 },
-  { id: 4, name: "Shoes", doc_count: 17 },
-];
-
 const MenuMobile: React.FC<MenuMobileProps> = ({
   showCatMenu,
   setShowCatMenu,
@@ -49,20 +42,22 @@ const MenuMobile: React.FC<MenuMobileProps> = ({
 
                 {showCatMenu && (
                   <ul className="bg-black/[0.05] -mx-5 mt-4 -mb-4">
-                    {subMenuData.map((c: Category) => {
+                    {categories.map((c, id) => {
                       return (
                         <Link
-                          key={c.id}
-                          href={`/category/${c.name.toLowerCase()}`}
+                          key={id}
+                          href={`/category/${c.attributes.name}`}
                           onClick={() => {
                             setShowCatMenu(false);
                             setMobileMenu(false);
                           }}
                         >
                           <li className="py-4 px-8 border-t flex justify-between">
-                            {c.name}
+                            {c.attributes.name}
                             <span className="opacity-50 text-sm">
-                              {`(${c.doc_count})`}
+                              {`(${
+                                Object.keys(c.attributes.products.data).length
+                              })`}
                             </span>
                           </li>
                         </Link>

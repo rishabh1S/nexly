@@ -7,8 +7,22 @@ export interface MenuItem {
 
 export interface Category {
   id: number;
-  name: string;
-  doc_count: number;
+  attributes: {
+    name: string;
+    slug: string;
+    products: {
+      data: {};
+    };
+  };
+  categories: {
+    data: {
+      id: number;
+      attributes: {
+        name: string;
+        slug: string;
+      };
+    };
+  };
 }
 
 export interface CarouselItem {
@@ -20,9 +34,11 @@ export interface CarouselItem {
 export interface Product {
   id: number;
   attributes: {
+    categories: any;
     name: string;
     price: number;
     original_price: number;
+    slug: string;
     thumbnail: {
       data: {
         attributes: {

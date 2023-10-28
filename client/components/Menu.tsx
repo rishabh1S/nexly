@@ -16,13 +16,6 @@ const data: MenuItem[] = [
   { id: 4, name: "Contact", url: "/contact" },
 ];
 
-const subMenuData: Category[] = [
-  { id: 1, name: "Men", doc_count: 11 },
-  { id: 2, name: "Women", doc_count: 8 },
-  { id: 3, name: "Accessories", doc_count: 64 },
-  { id: 4, name: "Shoes", doc_count: 17 },
-];
-
 const Menu: React.FC<MenuProps> = ({
   showCatMenu,
   setShowCatMenu,
@@ -44,17 +37,19 @@ const Menu: React.FC<MenuProps> = ({
 
                 {showCatMenu && (
                   <ul className="bg-white absolute top-6 left-0 min-w-[250px] px-1 py-1 text-black shadow-lg">
-                    {subMenuData.map((c: Category) => {
+                    {categories?.map((c, id) => {
                       return (
                         <Link
-                          key={c.id}
-                          href={`/category/${c.name.toLowerCase()}`}
+                          key={id}
+                          href={`/category/${c.attributes.slug}`}
                           onClick={() => setShowCatMenu(false)}
                         >
                           <li className="h-12 flex justify-between items-center px-3 hover:bg-black/[0.03] rounded-md">
-                            {c.name}
+                            {c.attributes.name}
                             <span className="opacity-50 text-sm">
-                              {`(${c.doc_count})`}
+                              {`(${
+                                Object.keys(c.attributes.products.data).length
+                              })`}
                             </span>
                           </li>
                         </Link>

@@ -1,6 +1,12 @@
 import React from "react";
 import { IoMdHeartEmpty } from "react-icons/io";
 import { Wrapper, ProductDetailsCarousel, RelatedProducts } from "@/components";
+import { fetchDataFromApi } from "@/utils/api";
+import { getDiscountedPricePercentage } from "@/utils/helper";
+import ReactMarkdown from "react-markdown";
+import { useSelector, useDispatch } from "react-redux";
+// import { addToCart } from "@/store/cartSlice";
+import { Toaster, toast } from "sonner";
 
 const ProductDetails = () => {
   return (
@@ -86,7 +92,7 @@ const ProductDetails = () => {
             </div>
           </div>
         </div>
-        <RelatedProducts />
+        {/* <RelatedProducts /> */}
       </Wrapper>
     </div>
   );
