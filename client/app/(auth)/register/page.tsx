@@ -17,7 +17,7 @@ const Registration: React.FC = () => {
     let avatarUrl = "";
     try {
       const avatarResponse = await axios.get(
-        `https://api.dicebear.com/7.x/micah/svg?flip=true&backgroundType=gradientLinear&backgroundRotation[]&baseColor=f9c9b6,ac6651&earringsProbability=15&facialHair=scruff&facialHairProbability=30&hair=dannyPhantom,fonze,full,pixie,turban,mrClean&hairProbability=95&backgroundColor=b6e3f4,c0aede,d1d4f9,ffd5dc,ffdfbf&seed=${full_name}`
+        `https://api.dicebear.com/7.x/adventurer/svg?backgroundType=gradientLinear&earringsProbability=25&features=birthmark,blush,freckles&featuresProbability=55&glassesProbability=15&hair=long01,long02,long03,long04,long05,long06,long07,long08,long09,long10,long11,long12,long13,long14,long15,long16,long17,long18,long19,long20,long21,long22,long23,long24,long25,long26,short01,short02,short03,short04,short05,short06,short07,short08,short09,short10,short11,short13,short14,short15,short16,short17,short18&hairColor=0e0e0e,562306,592454,6a4e35,796a45,85c2c6,ab2a18,ac6511,afafaf,b9a05f,cb6820,dba3be,e5d7a3&skinColor=ecad80,f2d3b1&backgroundColor=b6e3f4,c0aede,d1d4f9,ffd5dc,ffdfbf&seed=${full_name}`
       );
       avatarUrl = avatarResponse.request.responseURL;
     } catch (error) {
@@ -57,7 +57,9 @@ const Registration: React.FC = () => {
       } else {
         console.log("User registered:", registrationData);
         toast.success("Check your email for confirmation");
-        router.push("/login");
+        setTimeout(() => {
+          router.push("/login");
+        }, 4000);
       }
     }
   };

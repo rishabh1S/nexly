@@ -27,6 +27,7 @@ const ProductDetails: React.FC = () => {
   const [product, setProduct] = useState<ProductApiResponse | null>(null);
   const [products, setProducts] = useState<ProductApiResponse | null>(null);
   const [selectedSize, setSelectedSize] = useState<string>();
+  const [wishlistClicked, setWishlistClicked] = useState(false);
   const [showError, setShowError] = useState(false);
   const dispatch = useDispatch();
   const { slug } = useParams();
@@ -115,12 +116,18 @@ const ProductDetails: React.FC = () => {
                       key={i}
                       className={`border rounded-md text-center py-3 font-medium ${
                         item.enabled
-                          ? "hover:border-black cursor-pointer"
+                          ? selectedSize === item.size
+                            ? "border-black"
+                            : "hover:border-black cursor-pointer"
                           : "cursor-not-allowed bg-black/[0.1] opacity-50"
-                      } ${selectedSize === item.size ? "border-black" : ""}`}
+                      }`}
                       onClick={() => {
-                        setSelectedSize(item.size);
-                        setShowError(false);
+                        if (item.enabled) {
+                          setSelectedSize(item.size);
+                          setShowError(false);
+                        } else {
+                          setShowError(true);
+                        }
                       }}
                     >
                       {item.size}
@@ -131,27 +138,21 @@ const ProductDetails: React.FC = () => {
 
               {showError && (
                 <div className="text-red-600 mt-1">
-                  Size selection is required
+                  {selectedSize
+                    ? "This size is not available"
+                    : "Size selection is required"}
                 </div>
               )}
             </div>
 
             <button
-              className="w-full py-4 rounded-full bg-black text-white text-lg font-medium transition-transform active:scale-95 mb-3 hover:opacity-75"
+              className="w-full py-4 rounded-full bg-violet-600 text-white text-lg font-medium transition-transform active:scale-95 mb-3 hover:opacity-75"
               onClick={() => {
-                if (!selectedSize) {
-                  setShowError(true);
-                  const sizesGridElement = document.getElementById("sizesGrid");
-                  if (sizesGridElement) {
-                    sizesGridElement.scrollIntoView({
-                      block: "center",
-                      behavior: "smooth",
-                    });
-                  }
-                } else {
+                if (selectedSize) {
                   dispatch(
                     addToCart({
                       id: product?.data?.[0].id,
+                      slug: product?.data?.[0].attributes.slug,
                       name: product?.data?.[0].attributes.name,
                       subtitle: product?.data?.[0].attributes.subtitle,
                       quantity: 1,
@@ -167,14 +168,17 @@ const ProductDetails: React.FC = () => {
                     })
                   );
                   toast.success("Success. Check your cart!");
+                } else {
+                  setShowError(true);
                 }
               }}
             >
               Add to Cart
             </button>
-
             <button
-              className="w-full py-4 rounded-full border border-black text-lg font-medium transition-transform active:scale-95 flex items-center justify-center gap-2 hover:opacity-75 mb-10"
+              className={`w-full py-4 rounded-full border border-black text-lg font-medium transition-transform active:scale-95 flex items-center justify-center gap-2 hover:opacity-75 mb-10 ${
+                wishlistClicked ? "bg-[#535766] text-white" : "bg-white"
+              }`}
               onClick={() => {
                 dispatch(
                   addToWishlist({
@@ -193,10 +197,11 @@ const ProductDetails: React.FC = () => {
                   })
                 );
                 toast.success("Success. Check your wishlist!");
+                setWishlistClicked(true);
               }}
             >
-              Whishlist
-              <IoMdHeartEmpty size={20} />
+              Wishlist
+              <IoMdHeartEmpty size={20} color={wishlistClicked ? "red" : ""} />
             </button>
             <div>
               <div className="text-lg font-bold mb-5">Product Details</div>

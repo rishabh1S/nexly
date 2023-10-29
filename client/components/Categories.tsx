@@ -25,7 +25,7 @@ const Categories: React.FC = () => {
             alt=""
           />
           <button className="cat-button">
-            <Link href="/Products/1" className="link">
+            <Link href="/category/accessories" className="link">
               Accessories
             </Link>
           </button>

@@ -31,17 +31,17 @@ const Wishlist = () => {
             </span>
             <Link
               href="/"
-              className="py-4 px-8 rounded-full bg-black text-white text-lg font-medium transition-transform active:scale-95 mb-3 hover:opacity-75 mt-8"
+              className="py-4 px-8 rounded-full bg-violet-600 text-white text-lg font-medium transition-transform active:scale-95 mb-3 hover:opacity-75 mt-8"
             >
               Continue Shopping
             </Link>
           </div>
         ) : (
-          <>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5 my-14 px-5 md:px-0">
             {wishlistItems.map((item) => (
               <WishlistItem key={item.id} data={item} />
             ))}
-          </>
+          </div>
         )}
       </Wrapper>
     </div>
