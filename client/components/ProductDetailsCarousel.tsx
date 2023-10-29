@@ -1,7 +1,6 @@
-/* eslint-disable react/jsx-key */
 /* eslint-disable @next/next/no-img-element */
-"use client";
 
+"use client";
 import React from "react";
 import "react-responsive-carousel/lib/styles/carousel.min.css";
 import { Carousel } from "react-responsive-carousel";
@@ -27,7 +26,7 @@ const ProductDetailsCarousel: React.FC<ProductCarouselProps> = ({ images }) => {
           }) => (
             <img
               key={img.id}
-              src={img.attributes?.url}
+              src={img.attributes.url}
               alt={img.attributes.name}
             />
           )

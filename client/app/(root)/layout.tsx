@@ -4,6 +4,7 @@ import "../globals.css";
 const oswald = Oswald({ subsets: ["latin"] });
 const urbanist = Urbanist({ subsets: ["latin"] });
 import { Header, Footer } from "@/components";
+import { StoreProvider } from "@/store/StoreProvider";
 
 export const metadata: Metadata = {
   title: "Buy Next | Online Store",
@@ -16,15 +17,17 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en">
-      <body
-        suppressHydrationWarning={true}
-        className={`${oswald.className} ${urbanist.className}`}
-      >
-        <Header />
-        {children}
-        <Footer />
-      </body>
-    </html>
+    <StoreProvider>
+      <html lang="en">
+        <body
+          suppressHydrationWarning={true}
+          className={`${oswald.className} ${urbanist.className}`}
+        >
+          <Header />
+          {children}
+          <Footer />
+        </body>
+      </html>
+    </StoreProvider>
   );
 }

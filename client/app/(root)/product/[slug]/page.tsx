@@ -15,6 +15,9 @@ import { Toaster, toast } from "sonner";
 import { useParams } from "next/navigation";
 import Image from "next/image";
 import { Product } from "@/utils/types";
+import { useSelector, useDispatch } from "react-redux";
+import { addToCart } from "@/store/cartSlice";
+import { addToWishlist } from "@/store/wishlistSlice";
 
 interface ProductApiResponse {
   data: Product[];
@@ -25,6 +28,7 @@ const ProductDetails: React.FC = () => {
   const [products, setProducts] = useState<ProductApiResponse | null>(null);
   const [selectedSize, setSelectedSize] = useState<string>();
   const [showError, setShowError] = useState(false);
+  const dispatch = useDispatch();
   const { slug } = useParams();
 
   useEffect(() => {
@@ -49,7 +53,6 @@ const ProductDetails: React.FC = () => {
   if (!product || !products) {
     return (
       <div className="w-full md:py-20 relative min-h-screen">
-        <Toaster richColors position="top-center" closeButton />
         <div className="text-2xl fixed inset-0 bg-white/[0.5] flex justify-center items-center gap-4">
           <div>
             <Image width={50} height={50} src="/carts.png" alt="logo" />
@@ -64,6 +67,7 @@ const ProductDetails: React.FC = () => {
   return (
     <div className="w-full min-h-screen">
       <Announcement />
+      <Toaster richColors position="top-center" closeButton />
       <Wrapper className="md:py-16 py-4">
         <div className="flex flex-col lg:flex-row gap-[50px] lg:gap-[100px]">
           <div className="w-full md:w-auto flex-[1.5] max-w-[500px] lg:max-w-full mx-auto lg:mx-0">
@@ -145,6 +149,23 @@ const ProductDetails: React.FC = () => {
                     });
                   }
                 } else {
+                  dispatch(
+                    addToCart({
+                      id: product?.data?.[0].id,
+                      name: product?.data?.[0].attributes.name,
+                      subtitle: product?.data?.[0].attributes.subtitle,
+                      quantity: 1,
+                      oneQuantityPrice: p.price,
+                      attributes: {
+                        price: p.price,
+                        selectedSize: selectedSize,
+                        thumbnail: p.thumbnail?.data.attributes.url,
+                        size: {
+                          data: p.size.data,
+                        },
+                      },
+                    })
+                  );
                   toast.success("Success. Check your cart!");
                 }
               }}
@@ -152,11 +173,31 @@ const ProductDetails: React.FC = () => {
               Add to Cart
             </button>
 
-            <button className="w-full py-4 rounded-full border border-black text-lg font-medium transition-transform active:scale-95 flex items-center justify-center gap-2 hover:opacity-75 mb-10">
+            <button
+              className="w-full py-4 rounded-full border border-black text-lg font-medium transition-transform active:scale-95 flex items-center justify-center gap-2 hover:opacity-75 mb-10"
+              onClick={() => {
+                dispatch(
+                  addToWishlist({
+                    id: product?.data?.[0].id,
+                    slug: product?.data?.[0].attributes.slug,
+                    name: product?.data?.[0].attributes.name,
+                    subtitle: product?.data?.[0].attributes.subtitle,
+                    attributes: {
+                      price: p.price,
+                      original_price: p.original_price,
+                      thumbnail: p.thumbnail?.data.attributes.url,
+                      size: {
+                        data: p.size.data,
+                      },
+                    },
+                  })
+                );
+                toast.success("Success. Check your wishlist!");
+              }}
+            >
               Whishlist
               <IoMdHeartEmpty size={20} />
             </button>
-
             <div>
               <div className="text-lg font-bold mb-5">Product Details</div>
               <div className="markdown text-md mb-5 text-justify">
