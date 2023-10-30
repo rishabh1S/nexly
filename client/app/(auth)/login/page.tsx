@@ -49,7 +49,7 @@ const Login: React.FC = () => {
                     id="email"
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
-                    className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-violet-500 focus:border-violet-500 block w-full p-2.5"
+                    className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5 focus:border-none focus:outline-none ring-1 ring-white/10 focus:ring-2 focus:ring-inset focus:ring-indigo-500"
                     placeholder="name@company.com"
                     required
                   />
@@ -65,7 +65,7 @@ const Login: React.FC = () => {
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
                     placeholder="******************"
-                    className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-violet-500 focus:border-violet-500 block w-full p-2.5"
+                    className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5 focus:border-none focus:outline-none ring-1 ring-white/10 focus:ring-2 focus:ring-inset focus:ring-indigo-500"
                     required
                   />
                 </div>

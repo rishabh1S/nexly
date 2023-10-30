@@ -54,6 +54,7 @@ const WishlistItem: React.FC<WishlistItemProps> = ({ data }) => {
           dispatch(
             addToCart({
               id: data.id,
+              slug: data.slug,
               name: data.name,
               subtitle: data.subtitle,
               quantity: 1,

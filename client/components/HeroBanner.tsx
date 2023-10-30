@@ -11,13 +11,13 @@ const subMenuData: CarouselItem[] = [
   {
     id: 1,
     imgSrc:
-      "https://res.cloudinary.com/dnp36kqdc/image/upload/v1697549100/SupaBazaar%20E-commerce/slide-1.png",
+      "https://res.cloudinary.com/dnp36kqdc/image/upload/v1698698098/SupaBazaar%20E-commerce/slide-1.png",
     alt: "Carousel 1",
   },
   {
     id: 2,
     imgSrc:
-      "https://res.cloudinary.com/dnp36kqdc/image/upload/v1697555697/SupaBazaar%20E-commerce/slide-2.png",
+      "https://res.cloudinary.com/dnp36kqdc/image/upload/v1698697979/SupaBazaar%20E-commerce/slide-2.png",
     alt: "Carousel 2",
   },
   {
@@ -47,9 +47,15 @@ const HeroBanner = () => {
               alt={item.alt}
               className="aspect-[16/10] md:aspect-auto object-cover"
             />
-            <div className="px-[15px] md:px-[40px] py-[10px] md:py-[25px] font-oswald bg-white absolute bottom-[25px] md:bottom-[75px] left-0 text-black/[0.9] text-[15px] md:text-[30px] uppercase font-medium cursor-pointer hover:opacity-90">
+            <h1 className="text-[150px] font-bold leading-none text-white absolute left-[20px] bottom-[200px] -z-10">
+              SALES
+            </h1>
+            <Link
+              className="px-[15px] md:px-[40px] py-[10px] md:py-[25px] font-oswald bg-white absolute bottom-[25px] md:bottom-[75px] left-0 text-black/[0.9] text-[15px] md:text-[30px] uppercase font-medium cursor-pointer hover:opacity-90"
+              href="/category/sale"
+            >
               Shop now
-            </div>
+            </Link>
           </div>
         ))}
       </Carousel>

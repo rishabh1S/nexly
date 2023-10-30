@@ -52,10 +52,9 @@ const Contact: React.FC = () => {
             id="email"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
-            className={`shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2 ${
-              email.length > 0 && email.length < 5 ? "ring-1 ring-red-500" : ""
-            }`}
+            className={`shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2 focus:border-none focus:outline-none ring-1 ring-inset ring-white/10 focus:ring-2 focus:ring-inset focus:ring-indigo-500`}
             placeholder="name@gmail.com"
+            required
           />
         </div>
         <div>
@@ -70,7 +69,7 @@ const Contact: React.FC = () => {
             id="subject"
             value={subject}
             onChange={(e) => setSubject(e.target.value)}
-            className="block p-2 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 shadow-sm"
+            className="block p-2 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 shadow-sm focus:border-none focus:outline-none ring-1 ring-inset ring-white/10 focus:ring-2 focus:ring-inset focus:ring-indigo-500"
             placeholder="Let us know how we can help you"
           />
         </div>
@@ -86,17 +85,14 @@ const Contact: React.FC = () => {
             rows={6}
             value={message}
             onChange={(e) => setMessage(e.target.value)}
-            className={`block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg shadow-sm border border-gray-300 ${
-              message.length > 0 && message.length < 1
-                ? "ring-1 ring-red-500"
-                : ""
-            }`}
+            className={`block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg shadow-sm border border-gray-300 focus:border-none focus:outline-none ring-1 ring-white/10 focus:ring-2 focus:ring-inset focus:ring-indigo-500`}
             placeholder="Leave a comment..."
+            required
           />
         </div>
         <button
           type="submit"
-          className="py-3 px-5 text-sm font-medium text-center text-white rounded-lg bg-violet-600 sm:w-fit hover:bg-violet-500 focus:ring-4 focus:outline-none focus:ring-violet-300"
+          className="py-3 px-5 text-sm font-medium text-center text-white rounded-lg bg-violet-600 sm:w-fit hover:bg-violet-500 focus:outline-none"
         >
           Send message
         </button>
