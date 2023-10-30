@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState, useEffect } from "react";
-import { IoMdHeartEmpty } from "react-icons/io";
+import { IoMdHeart, IoMdHeartEmpty } from "react-icons/io";
 import {
   Wrapper,
   ProductDetailsCarousel,
@@ -201,7 +201,11 @@ const ProductDetails: React.FC = () => {
               }}
             >
               Wishlist
-              <IoMdHeartEmpty size={20} color={wishlistClicked ? "red" : ""} />
+              {wishlistClicked ? (
+                <IoMdHeart size={20} color="red" />
+              ) : (
+                <IoMdHeartEmpty size={20} />
+              )}
             </button>
             <div>
               <div className="text-lg font-bold mb-5">Product Details</div>
