@@ -127,4 +127,4 @@ You can deploy the front-end and back-end separately. We recommend using platfor
 
 ## License
 
-This project is licensed under the [MIT](https://github.com/rishabh1S/BookSwap/blob/main/LICENSE).
+This project is licensed under the [MIT](https://github.com/rishabh1S/buy-next/blob/main/LICENSE).
