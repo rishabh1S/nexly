@@ -47,7 +47,7 @@ const HeroBanner = () => {
               alt={item.alt}
               className="aspect-[16/10] md:aspect-auto object-cover"
             />
-            <h1 className="text-[150px] font-bold leading-none text-white absolute left-[20px] bottom-[200px] -z-10">
+            <h1 className="text-7xl sm:text-[150px] font-bold leading-none text-white absolute left-[20px] sm:bottom-[200px] bottom-[150px] -z-10">
               SALES
             </h1>
             <Link
