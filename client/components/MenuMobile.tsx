@@ -42,11 +42,11 @@ const MenuMobile: React.FC<MenuMobileProps> = ({
 
                 {showCatMenu && (
                   <ul className="bg-black/[0.05] -mx-5 mt-4 -mb-4">
-                    {categories.map((c, id) => {
+                    {categories?.map((c, id) => {
                       return (
                         <Link
                           key={id}
-                          href={`/category/${c.attributes.name}`}
+                          href={`/category/${c.attributes.slug}`}
                           onClick={() => {
                             setShowCatMenu(false);
                             setMobileMenu(false);
