@@ -1,6 +1,6 @@
-# NextBuy <img src="https://res.cloudinary.com/dnp36kqdc/image/upload/v1698754982/SupaBazaar%20E-commerce/carts_zudgx3.png" width="25" height="25"> - Your Amazing E-commerce
+# BuyNext <img src="https://res.cloudinary.com/dnp36kqdc/image/upload/v1698754982/SupaBazaar%20E-commerce/carts_zudgx3.png" width="25" height="25"> - Your Amazing E-commerce
 
-Welcome to NextBuy, an incredible e-commerce project built with Next.js, TypeScript, Strapi, Stripe, and Supabase. This repository contains the source code and setup instructions to help you get started with your own e-commerce website.
+Welcome to BuyNext, an incredible e-commerce project built with Next.js, TypeScript, Strapi, Stripe, and Supabase. This repository contains the source code and setup instructions to help you get started with your own e-commerce website.
 
 ## Table of Contents
 
@@ -19,13 +19,13 @@ Welcome to NextBuy, an incredible e-commerce project built with Next.js, TypeScr
 
 - **Beautiful UI**: Our minimalistic and eye-catching design ensures an immersive shopping journey for users.
 
-- **User-Centric Approach**: We understand that your time is precious. NextBuy is designed to provide a seamless and personalized shopping experience.
+- **User-Centric Approach**: We understand that your time is precious. BuyNext is designed to provide a seamless and personalized shopping experience.
 
 - **Quality Products**: Our platform offers handpicked products that add value to your life, not just items you buy.
 
 - **Sustainability**: We're committed to responsible shopping. You'll find eco-friendly options and ethically sourced products.
 
-- **Community**: NextBuy is more than a shopping destination; it's a community. Connect with us, share your thoughts, and be a part of the journey.
+- **Community**: BuyNext is more than a shopping destination; it's a community. Connect with us, share your thoughts, and be a part of the journey.
 
 - **Innovation**: Our dedication to innovation means you can expect a refined shopping experience with every visit.
 
@@ -119,7 +119,7 @@ Before you begin, ensure you have the following software and accounts set up:
    npm run develop
 ```
 
-7. Your NextBuy E-commerce platform is now running locally.
+7. Your BuyNext E-commerce platform is now running locally.
 
 ## Deployment
 
