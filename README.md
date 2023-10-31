@@ -1,130 +1,36 @@
-# NextBuy <img src="https://res.cloudinary.com/dnp36kqdc/image/upload/v1698754982/SupaBazaar%20E-commerce/carts_zudgx3.png" width="25" height="25"> - Your Amazing E-commerce
-
-Welcome to NextBuy, an incredible e-commerce project built with Next.js, TypeScript, Strapi, Stripe, and Supabase. This repository contains the source code and setup instructions to help you get started with your own e-commerce website.
-
-## Table of Contents
-
-- [Features](#features)
-- [Prerequisites](#prerequisites)
-- [Tech Stack](#tech-stack)
-- [Getting Started](#getting-started)
-  - [Frontend](#client)
-  - [Backend](#server)
-- [Deployment](#deployment)
-- [License](#license)
-
-## Features
-
-- **Modern Stack**: Next.js, TypeScript, Tailwind CSS, Strapi, Stripe, and Supabase - the perfect combination for building a robust and scalable E-commerce platform.
-
-- **Beautiful UI**: Our minimalistic and eye-catching design ensures an immersive shopping journey for users.
-
-- **User-Centric Approach**: We understand that your time is precious. NextBuy is designed to provide a seamless and personalized shopping experience.
-
-- **Quality Products**: Our platform offers handpicked products that add value to your life, not just items you buy.
-
-- **Sustainability**: We're committed to responsible shopping. You'll find eco-friendly options and ethically sourced products.
-
-- **Community**: NextBuy is more than a shopping destination; it's a community. Connect with us, share your thoughts, and be a part of the journey.
-
-- **Innovation**: Our dedication to innovation means you can expect a refined shopping experience with every visit.
-
-## Prerequisites
-
-Before you begin, ensure you have the following software and accounts set up:
-
-- Node.js and npm: [Download and install Node.js](https://nodejs.org/)
-
-- Stripe Account: [Sign up for a Stripe account](https://stripe.com/in)
-
-- Supabase Account: [Create a Supabase account](https://supabase.com/)
-
-## Tech Stack
-
-- **Front-End (Client)**:
-
-  - Next.js 14
-  - TypeScript
-  - Tailwind CSS
-
-- **Back-End (Server)**:
-
-  - Strapi
-
-- **Payment Handling**:
-
-  - Stripe
-
-- **Database and Authentication**:
-  - Supabase
+This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
 ## Getting Started
 
-### Client
-
-1. Navigate to the client directory.
-   ```bash
-   cd client
-   ```
-2. Create a .env.local file in the client directory and set the following environment variables:
-
-`NEXT_PUBLIC_SUPABASE_URL`
-`NEXT_PUBLIC_SUPABASE_ANON_KEY`
-`NEXT_PUBLIC_STRAPI_API_TOKEN`
-`NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY`
-
-3. Install dependencies for the front-end.
-   ```bash
-   npm install
-   ```
-4. Start the development server.
-   ```bash
-   npm run dev
-   ```
-
-### Server
-
-1. Navigate to the client directory.
-   ```bash
-   cd server
-   ```
-2. Create a .env file in the server directory and set the following environment variables:
-
-`DATABASE_CLIENT`
-`DATABASE_HOST`
-`DATABASE_PORT`
-`DATABASE_NAME`
-`DATABASE_USERNAME`
-`DATABASE_PASSWORD`
-`DATABASE_SSL`
-`CLOUDINARY_NAME`
-`CLOUDINARY_KEY`
-`CLOUDINARY_SECRET`
-`JWT_SECRET`
-`STRIPE_KEY`
-`CLIENT_URL`
-
-3. Install Strapi for the backend:
+First, run the development server:
 
 ```bash
-   npm install -g create-strapi-app
-   create-strapi-app my-ecommerce-cms --quickstart
+npm run dev
+# or
+yarn dev
+# or
+pnpm dev
+# or
+bun dev
 ```
 
-4. Create your content types and set up the Strapi admin panel.
-5. Configure Stripe for payment handling and Supabase for database and authentication.
-6. Start the Strapi server.
+Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-```bash
-   npm run develop
-```
+You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
 
-7. Your NextBuy E-commerce platform is now running locally.
+This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
 
-## Deployment
+## Learn More
 
-You can deploy the front-end and back-end separately. We recommend using platforms like Vercel for the Next.js app (client) and dedicated hosting for your Strapi and Supabase instances (server).
+To learn more about Next.js, take a look at the following resources:
 
-## License
+- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
+- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
 
-This project is licensed under the MIT License.
+You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+
+## Deploy on Vercel
+
+The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+
+Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
