@@ -2,6 +2,8 @@
 
 Welcome to BuyNext, an incredible e-commerce project built with Next.js, TypeScript, Strapi, Stripe, and Supabase. This repository contains the source code and setup instructions to help you get started with your own e-commerce website.
 
+<img src="https://res.cloudinary.com/dnp36kqdc/image/upload/v1698766434/CDN%20for%20portfolio/Buy-Next-Online-Store_uqywls.png" width="800">
+
 ## Table of Contents
 
 - [Features](#features)
