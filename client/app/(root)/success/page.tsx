@@ -24,7 +24,7 @@ const Success = () => {
             <div className="text-base mt-5">
               For any product related query, drop an email to
             </div>
-            <div className="underline">support@buynext.com</div>
+            <div className="underline">support@nexly.com</div>
             <div className="py-10 text-center">
               <Link
                 href="/"

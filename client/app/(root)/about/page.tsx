@@ -14,8 +14,8 @@ const page = () => {
               </h2>
               <div className="text-gray-800 text-md md:text-lg leading-relaxed text-justify">
                 <p className="mb-2">
-                  Welcome to the future of online shopping. At BuyNext, we're on
-                  a mission to redefine your e-commerce experience.
+                  Welcome to the future of online shopping. At Nexly, we're on a
+                  mission to redefine your e-commerce experience.
                 </p>
                 <p className="mb-2">
                   We believe that shopping should be more than just a
@@ -53,9 +53,9 @@ const page = () => {
                   throughout our supply chain.
                 </p>
                 <p className="mb-2">
-                  BuyNext is not just a shopping destination; it's a community.
-                  We invite you to connect with us, share your thoughts, and be
-                  a part of this exciting journey.
+                  Nexly is not just a shopping destination; it's a community. We
+                  invite you to connect with us, share your thoughts, and be a
+                  part of this exciting journey.
                 </p>
                 <p className="mb-2">
                   Our customer support team is here to assist you, and we value
@@ -68,10 +68,10 @@ const page = () => {
                   brands and products you love.
                 </p>
                 <p className="mb-2">
-                  Thank you for choosing BuyNext. We're thrilled to have you
-                  with us on this e-commerce adventure. Together, let's redefine
-                  the art of shopping and create a better future for consumers
-                  and businesses alike.
+                  Thank you for choosing Nexly. We're thrilled to have you with
+                  us on this e-commerce adventure. Together, let's redefine the
+                  art of shopping and create a better future for consumers and
+                  businesses alike.
                 </p>
               </div>
             </div>

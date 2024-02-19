@@ -68,7 +68,7 @@ const Header = () => {
           <div>
             <Image width={25} height={25} src="/carts.png" alt="logo" />
           </div>
-          <div>PixelPay</div>
+          <div>Nexly</div>
         </Link>
         <Menu
           showCatMenu={showCatMenu}

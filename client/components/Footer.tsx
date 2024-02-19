@@ -121,8 +121,7 @@ const Footer = () => {
       <Wrapper className="flex justify-between mt-10 flex-col md:flex-row gap-[10px] md:gap-0">
         {/* LEFT START */}
         <div className="text-[12px] text-white/[0.5] hover:text-white cursor-pointer text-center md:text-left">
-          &#64; Copyright {new Date().getFullYear()} BuyNext, All Rights
-          Reserved
+          &#64; Copyright {new Date().getFullYear()} Nexly, All Rights Reserved
         </div>
         {/* LEFT END */}
 
