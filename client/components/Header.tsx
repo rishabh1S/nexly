@@ -6,9 +6,7 @@ import React, { useState, useEffect } from "react";
 import { Menu, MenuMobile, Wrapper } from ".";
 import Link from "next/link";
 import Image from "next/image";
-import { Category, MenuItem } from "../utils/types";
-import { handleSignOut } from "@/utils/supabase";
-import supabase from "../utils/supabase";
+import { Category } from "../utils/types";
 import { IoMdHeartEmpty } from "react-icons/io";
 import { BsCart } from "react-icons/bs";
 import { BiMenuAltRight } from "react-icons/bi";
@@ -43,7 +41,6 @@ const Header = () => {
     setLastScrollY(window.scrollY);
   };
   useEffect(() => {
-    getProfile();
     window.addEventListener("scroll", controlNavbar);
     return () => {
       window.removeEventListener("scroll", controlNavbar);
@@ -59,27 +56,6 @@ const Header = () => {
     setCategories(data);
   };
 
-  const getProfile = async () => {
-    try {
-      const response = await supabase.auth.getUser();
-      const user = response.data?.user;
-      if (user) {
-        const { data, error, status } = await supabase
-          .from("profiles")
-          .select(`full_name, avatar_url`)
-          .eq("id", user.id)
-          .single();
-
-        if (data) {
-          setFullName(data.full_name);
-          setAvatarUrl(data.avatar_url);
-        }
-      }
-    } catch (error) {
-      console.log("Something went wrong: ", error);
-    }
-  };
-
   return (
     <div
       className={`w-full h-[50px] md:h-[80px] bg-white flex items-center justify-between z-20 sticky top-0 transition-transform duration-300 ${show}`}
@@ -92,7 +68,7 @@ const Header = () => {
           <div>
             <Image width={25} height={25} src="/carts.png" alt="logo" />
           </div>
-          <div>BuyNext</div>
+          <div>PixelPay</div>
         </Link>
         <Menu
           showCatMenu={showCatMenu}
@@ -164,7 +140,6 @@ const Header = () => {
                   href="/login"
                   className="block px-4 py-2 hover:bg-black/[0.03] rounded-md"
                   onClick={() => {
-                    handleSignOut();
                     setUserMenuOpen(false);
                   }}
                 >

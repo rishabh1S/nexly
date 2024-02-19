@@ -1,33 +1,12 @@
 "use client";
 
 import React, { useState } from "react";
-import supabase from "@/utils/supabase";
-import { Toaster, toast } from "sonner";
+import { Toaster } from "sonner";
 
 const Contact: React.FC = () => {
   const [email, setEmail] = useState("");
   const [subject, setSubject] = useState("");
   const [message, setMessage] = useState("");
-
-  const submitForm = async (e: React.FormEvent) => {
-    e.preventDefault();
-    const { data, error } = await supabase.from("contact").upsert([
-      {
-        email,
-        subject,
-        message,
-      },
-    ]);
-    if (error) {
-      console.error("Error saving data:", error);
-      toast.error("Something went wrong, while submitting form");
-    } else {
-      toast.success("Form submitted successfully!");
-      setEmail("");
-      setSubject("");
-      setMessage("");
-    }
-  };
 
   return (
     <div className="py-6 px-4 sm:px-6 lg:px-8 mx-auto max-w-screen-md">
@@ -39,7 +18,7 @@ const Contact: React.FC = () => {
         Got a technical issue? Want to send feedback about a beta feature? Need
         details about our Business plan? Let us know.
       </p>
-      <form onSubmit={submitForm} className="space-y-8">
+      <form className="space-y-8">
         <div>
           <label
             htmlFor="email"

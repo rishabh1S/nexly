@@ -8,38 +8,25 @@ import {
   NewsLetter,
   Announcement,
 } from "@/components";
-import { useEffect, useCallback, useState } from "react";
+import { useEffect, useState } from "react";
 import { Toaster } from "sonner";
 import { fetchDataFromApi } from "@/utils/api";
-import { checkAuthStatus } from "@/utils/supabase";
-import { useRouter } from "next/navigation";
 import { Product } from "@/utils/types";
 import Image from "next/image";
 
 export default function Home() {
   const [data, setData] = useState<Product[]>([]);
   const [loading, setLoading] = useState(true);
-  const router = useRouter();
 
   useEffect(() => {
-    checkStatus();
+    const fetchData = async () => {
+      const { data } = await fetchDataFromApi("/api/products?populate=*");
+      setData(data);
+      setLoading(false);
+    };
+
     fetchData();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
-
-  const checkStatus = useCallback(async () => {
-    const user = await checkAuthStatus();
-
-    if (!user) {
-      router.push("/login");
-    }
-  }, [router]);
-
-  const fetchData = async () => {
-    const { data } = await fetchDataFromApi("/api/products?populate=*");
-    setData(data);
-    setLoading(false);
-  };
 
   return (
     <main className="min-h-screen">

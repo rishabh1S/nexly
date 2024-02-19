@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import Link from "next/link";
 import { BsChevronDown } from "react-icons/bs";
 import { Category, MenuItem } from "../utils/types";
-import { handleSignOut } from "@/utils/supabase";
 
 interface MenuMobileProps {
   showCatMenu: boolean;
@@ -73,7 +72,6 @@ const MenuMobile: React.FC<MenuMobileProps> = ({
                     href={item.url}
                     onClick={() => {
                       if (item.name === "Sign Out") {
-                        handleSignOut();
                       }
                       setMobileMenu(false);
                     }}
