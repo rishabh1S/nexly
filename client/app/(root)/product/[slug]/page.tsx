@@ -7,15 +7,15 @@ import {
   ProductDetailsCarousel,
   RelatedProducts,
   Announcement,
+  Loading,
 } from "@/components";
 import { fetchDataFromApi } from "@/utils/api";
 import { getDiscountedPricePercentage } from "@/utils/helper";
 import ReactMarkdown from "react-markdown";
-import { Toaster, toast } from "sonner";
+import { toast } from "react-hot-toast";
 import { useParams } from "next/navigation";
-import Image from "next/image";
 import { Product } from "@/utils/types";
-import { useSelector, useDispatch } from "react-redux";
+import { useDispatch } from "react-redux";
 import { addToCart } from "@/store/cartSlice";
 import { addToWishlist } from "@/store/wishlistSlice";
 
@@ -52,23 +52,13 @@ const ProductDetails: React.FC = () => {
   };
 
   if (!product || !products) {
-    return (
-      <div className="w-full md:py-20 relative min-h-screen">
-        <div className="text-2xl fixed inset-0 bg-white/[0.5] flex justify-center items-center gap-4">
-          <div>
-            <Image width={50} height={50} src="/logo.png" alt="logo" />
-          </div>
-          Loading ...
-        </div>
-      </div>
-    );
+    return <Loading />;
   }
 
   const p = product?.data?.[0]?.attributes;
   return (
     <div className="w-full min-h-screen">
       <Announcement />
-      <Toaster richColors position="top-center" closeButton />
       <Wrapper className="md:py-16 py-4">
         <div className="flex flex-col lg:flex-row gap-[50px] lg:gap-[100px]">
           <div className="w-full md:w-auto flex-[1.5] max-w-[500px] lg:max-w-full mx-auto lg:mx-0">

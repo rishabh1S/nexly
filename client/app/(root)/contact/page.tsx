@@ -1,7 +1,6 @@
 "use client";
 
 import React, { useState } from "react";
-import { Toaster } from "sonner";
 
 const Contact: React.FC = () => {
   const [email, setEmail] = useState("");
@@ -10,7 +9,6 @@ const Contact: React.FC = () => {
 
   return (
     <div className="py-6 px-4 sm:px-6 lg:px-8 mx-auto max-w-screen-md">
-      <Toaster richColors position="top-center" closeButton />
       <h2 className="text-[30px] md:text-[40px] font-semibold text-gray-800 mb-4 sm:mb:6 text-center">
         Contact Us
       </h2>

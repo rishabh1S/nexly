@@ -1,10 +1,9 @@
 "use client";
 import React, { useEffect, useState } from "react";
-import { Wrapper, ProductCard, Announcement } from "@/components";
+import { Wrapper, ProductCard, Announcement, Loading } from "@/components";
 import { Product } from "@/utils/types";
 import { fetchDataFromApi } from "@/utils/api";
 import { useParams } from "next/navigation";
-import Image from "next/image";
 
 const Category = () => {
   const [data, setData] = useState<Product[]>([]);
@@ -35,12 +34,7 @@ const Category = () => {
       <Announcement />
       <Wrapper className="md:py-16 py-4">
         {loading ? (
-          <div className="text-2xl fixed inset-0 bg-white/[0.5] flex justify-center items-center gap-4">
-            <div>
-              <Image width={50} height={50} src="/logo.png" alt="logo" />
-            </div>
-            Loading ...
-          </div>
+          <Loading />
         ) : (
           <div>
             <div className="text-center max-w-[800px] mx-auto mt-8 md:mt-0">

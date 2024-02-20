@@ -7,12 +7,11 @@ import {
   ProductCard,
   NewsLetter,
   Announcement,
+  Loading,
 } from "@/components";
 import { useEffect, useState } from "react";
-import { Toaster } from "sonner";
 import { fetchDataFromApi } from "@/utils/api";
 import { Product } from "@/utils/types";
-import Image from "next/image";
 
 export default function Home() {
   const [data, setData] = useState<Product[]>([]);
@@ -30,19 +29,11 @@ export default function Home() {
 
   return (
     <main className="min-h-screen">
-      <Toaster richColors position="top-center" closeButton />
       <Announcement />
       <HeroBanner />
       <Wrapper>
         {loading ? (
-          <div className="min-h-screen">
-            <div className="text-2xl fixed inset-0 bg-white/[0.5] flex justify-center items-center gap-4">
-              <div>
-                <Image width={50} height={50} src="/logo.png" alt="logo" />
-              </div>
-              Loading ...
-            </div>
-          </div>
+          <Loading />
         ) : (
           <div>
             <div className="text-center max-w-[800px] mx-auto my-10 md:my-14">
@@ -65,17 +56,6 @@ export default function Home() {
           </div>
         )}
       </Wrapper>
-      <div className="text-center max-w-[800px] mx-auto my-10 md:my-14">
-        <div className="text-[30px] md:text-[40px] mb-5 font-semibold leading-tight">
-          Discover the Finest Collection
-        </div>
-        <div className="text-md md:text-xl">
-          Explore our extensive range of categories and discover products that
-          are thoughtfully selected to elevate your wardrobe, lifestyle, and
-          more. Whether you're seeking the latest fashion trends,
-          high-performance gear, or everyday essentials, we've got you covered.
-        </div>
-      </div>
       <Categories />
       <NewsLetter />
     </main>

@@ -6,7 +6,7 @@ import { MdClose } from "react-icons/md";
 import { getDiscountedPricePercentage } from "@/utils/helper";
 import Link from "next/link";
 import { addToCart } from "@/store/cartSlice";
-import { Toaster, toast } from "sonner";
+import { toast } from "react-hot-toast";
 
 interface WishlistItemProps {
   data: any;

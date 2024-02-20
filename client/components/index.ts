@@ -11,6 +11,7 @@ import RelatedProducts from "./RelatedProducts";
 import CartItem from "./CartItem";
 import NewsLetter from "./NewsLetter";
 import Announcement from "./Announcement";
+import Loading from "./Loading";
 
 export {
   Header,
@@ -25,5 +26,6 @@ export {
   RelatedProducts,
   CartItem,
   NewsLetter,
+  Loading,
   Announcement,
 };

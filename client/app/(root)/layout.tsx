@@ -5,6 +5,7 @@ const oswald = Oswald({ subsets: ["latin"] });
 const urbanist = Urbanist({ subsets: ["latin"] });
 import { Header, Footer } from "@/components";
 import { StoreProvider } from "@/store/StoreProvider";
+import { Toaster } from "react-hot-toast";
 
 export const metadata: Metadata = {
   title: "Online Shopping for Men, Women and Kids Fashion & Lifestyle - Nexly",
@@ -23,6 +24,7 @@ export default function RootLayout({
           suppressHydrationWarning={true}
           className={`${oswald.className} ${urbanist.className}`}
         >
+          <Toaster position="top-center" reverseOrder={false} />
           <Header />
           {children}
           <Footer />
