@@ -56,7 +56,7 @@ const ProductDetails: React.FC = () => {
       <div className="w-full md:py-20 relative min-h-screen">
         <div className="text-2xl fixed inset-0 bg-white/[0.5] flex justify-center items-center gap-4">
           <div>
-            <Image width={50} height={50} src="/carts.png" alt="logo" />
+            <Image width={50} height={50} src="/logo.png" alt="logo" />
           </div>
           Loading ...
         </div>
@@ -103,39 +103,42 @@ const ProductDetails: React.FC = () => {
             </div>
 
             <div className="mb-10">
-              <div className="flex justify-between mb-2">
-                <div className="text-md font-semibold">Select Size</div>
-                <div className="text-md font-medium text-black/[0.5] cursor-pointer">
-                  Select Guide
-                </div>
-              </div>
-              <div id="sizesGrid" className="grid grid-cols-3 gap-2">
-                {p?.size?.data?.map(
-                  (item: { size: string; enabled: boolean }, i: number) => (
-                    <div
-                      key={i}
-                      className={`border rounded-md text-center py-3 font-medium ${
-                        item.enabled
-                          ? selectedSize === item.size
-                            ? "border-black"
-                            : "hover:border-black cursor-pointer"
-                          : "cursor-not-allowed bg-black/[0.1] opacity-50"
-                      }`}
-                      onClick={() => {
-                        if (item.enabled) {
-                          setSelectedSize(item.size);
-                          setShowError(false);
-                        } else {
-                          setShowError(true);
-                        }
-                      }}
-                    >
-                      {item.size}
+              {p?.size && (
+                <>
+                  <div className="flex justify-between mb-2">
+                    <div className="text-md font-semibold">Select Size</div>
+                    <div className="text-md font-medium text-black/[0.5] cursor-pointer">
+                      Select Guide
                     </div>
-                  )
-                )}
-              </div>
-
+                  </div>
+                  <div id="sizesGrid" className="grid grid-cols-3 gap-2">
+                    {p?.size?.data?.map(
+                      (item: { size: string; enabled: boolean }, i: number) => (
+                        <div
+                          key={i}
+                          className={`border rounded-md text-center py-3 font-medium ${
+                            item.enabled
+                              ? selectedSize === item.size
+                                ? "border-black"
+                                : "hover:border-black cursor-pointer"
+                              : "cursor-not-allowed bg-black/[0.1] opacity-50"
+                          }`}
+                          onClick={() => {
+                            if (item.enabled) {
+                              setSelectedSize(item.size);
+                              setShowError(false);
+                            } else {
+                              setShowError(true);
+                            }
+                          }}
+                        >
+                          {item.size}
+                        </div>
+                      )
+                    )}
+                  </div>
+                </>
+              )}
               {showError && (
                 <div className="text-red-600 mt-1">
                   {selectedSize
@@ -144,7 +147,6 @@ const ProductDetails: React.FC = () => {
                 </div>
               )}
             </div>
-
             <button
               className="w-full py-4 rounded-full bg-violet-600 text-white text-lg font-medium transition-transform active:scale-95 mb-3 hover:opacity-75"
               onClick={() => {

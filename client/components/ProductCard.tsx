@@ -14,17 +14,18 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
     <Link
       href={`/product/${p.slug}`}
       passHref
-      className="transform overflow-hidden duration-200 hover:scale-105 cursor-pointer flex flex-col justify-between items-center border bg-gray-100"
+      className="transform overflow-hidden duration-200 cursor-pointer flex flex-col justify-between items-center border bg-gray-100"
     >
       <Image
-        width={290}
+        width={300}
         height={300}
         src={p.thumbnail?.data.attributes.url}
         alt={p.name}
+        className="w-72 h-96"
       />
       <div className="p-4 text-black/[0.9] border-t w-full bg-white">
         <h2 className="text-lg font-medium">{p.name}</h2>
-        <div className="flex items-center text-black/[0.5]">
+        <div className="flex items-center text-black/[0.8]">
           <p className="mr-2 text-lg font-semibold">&#8377;{p.price}</p>
           {p.original_price && (
             <>

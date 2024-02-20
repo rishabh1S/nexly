@@ -71,7 +71,7 @@ const Contact: React.FC = () => {
         </div>
         <button
           type="submit"
-          className="py-3 px-5 text-sm font-medium text-center text-white rounded-lg bg-violet-600 sm:w-fit hover:bg-violet-500 focus:outline-none"
+          className="py-3 px-5 text-sm font-medium text-center text-white rounded-lg bg-indigo-600 sm:w-fit hover:bg-indigo-500 focus:outline-none"
         >
           Send message
         </button>

@@ -10,7 +10,7 @@ import { RootState } from "@/store/store";
 import { makePaymentRequest } from "@/utils/api";
 import { loadStripe } from "@stripe/stripe-js";
 const stripePromise = loadStripe(
-  process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY || ""
+  process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY!
 );
 
 const Cart = () => {
@@ -78,7 +78,7 @@ const Cart = () => {
                   </div>
                 </div>
                 <button
-                  className="w-full py-4 rounded-full bg-violet-600 text-white text-lg font-medium transition-transform active:scale-95 mb-3 hover:opacity-75 flex items-center gap-2 justify-center"
+                  className="w-full py-4 rounded-full bg-indigo-600 hover:bg-indigo-500 text-white text-lg font-medium transition-transform mb-3 flex items-center gap-2 justify-center"
                   onClick={handlePayment}
                 >
                   Checkout

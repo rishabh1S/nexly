@@ -38,7 +38,7 @@ export default function Home() {
           <div className="min-h-screen">
             <div className="text-2xl fixed inset-0 bg-white/[0.5] flex justify-center items-center gap-4">
               <div>
-                <Image width={50} height={50} src="/carts.png" alt="logo" />
+                <Image width={50} height={50} src="/logo.png" alt="logo" />
               </div>
               Loading ...
             </div>

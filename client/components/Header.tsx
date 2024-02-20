@@ -6,7 +6,7 @@ import React, { useState, useEffect } from "react";
 import { Menu, MenuMobile, Wrapper } from ".";
 import Link from "next/link";
 import Image from "next/image";
-import { Category } from "../utils/types";
+import { CategoryMenu } from "../utils/types";
 import { IoMdHeartEmpty } from "react-icons/io";
 import { BsCart } from "react-icons/bs";
 import { BiMenuAltRight } from "react-icons/bi";
@@ -22,7 +22,7 @@ const Header = () => {
   const [userMenuOpen, setUserMenuOpen] = useState(false);
   const [show, setShow] = useState("translate-y-0");
   const [lastScrollY, setLastScrollY] = useState(0);
-  const [categories, setCategories] = useState<Category[]>([]);
+  const [categories, setCategories] = useState<CategoryMenu[]>([]);
   const [full_name, setFullName] = useState("");
   const [avatar_url, setAvatarUrl] = useState("");
   const { cartItems } = useSelector((state: RootState) => state.cart);
@@ -61,28 +61,13 @@ const Header = () => {
       className={`w-full h-[50px] md:h-[80px] bg-white flex items-center justify-between z-20 sticky top-0 transition-transform duration-300 ${show}`}
     >
       <Wrapper className="h-[60px] flex justify-between items-center">
-        <Link
-          href="/"
-          className="font-bold text-2xl flex justify-center items-center gap-2"
-        >
-          <div>
-            <Image width={25} height={25} src="/carts.png" alt="logo" />
-          </div>
-          <div>Nexly</div>
+        <Link href="/" className="flex justify-center items-center gap-2">
+          <Image width={45} height={45} src="/logo.png" alt="nexly logo" />
         </Link>
-        <Menu
-          showCatMenu={showCatMenu}
-          setShowCatMenu={setShowCatMenu}
-          categories={categories}
-        />
+        <Menu categories={categories} />
 
         {mobileMenu && (
-          <MenuMobile
-            showCatMenu={showCatMenu}
-            setShowCatMenu={setShowCatMenu}
-            setMobileMenu={setMobileMenu}
-            categories={categories}
-          />
+          <MenuMobile setMobileMenu={setMobileMenu} categories={categories} />
         )}
 
         <div className="flex items-center gap-2 text-black">

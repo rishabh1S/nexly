@@ -31,7 +31,7 @@ const Wishlist = () => {
             </span>
             <Link
               href="/"
-              className="py-4 px-8 rounded-full bg-violet-600 text-white text-lg font-medium transition-transform active:scale-95 mb-3 hover:opacity-75 mt-8"
+              className="py-4 px-8 rounded-full bg-indigo-600 hover:bg-indigo-500 text-white text-lg font-medium transition-transform mb-3 mt-8"
             >
               Continue Shopping
             </Link>

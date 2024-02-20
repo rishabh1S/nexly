@@ -1,71 +1,37 @@
-import React, { useState } from "react";
+import React from "react";
 import Link from "next/link";
-import { BsChevronDown } from "react-icons/bs";
-import { Category, MenuItem } from "../utils/types";
+import { CategoryMenu } from "../utils/types";
 
 interface MenuProps {
-  showCatMenu: boolean;
-  setShowCatMenu: (show: boolean) => void;
-  categories: Category[];
+  categories: CategoryMenu[];
 }
 
-const data: MenuItem[] = [
-  { id: 1, name: "Home", url: "/" },
-  { id: 2, name: "About", url: "/about" },
-  { id: 3, name: "Categories", subMenu: true },
-  { id: 4, name: "Contact", url: "/contact" },
-];
+const Menu: React.FC<MenuProps> = ({ categories }) => {
+  const categoryColors: { [key: string]: string } = {
+    men: "border-red-500",
+    women: "border-pink-400",
+    kids: "border-orange-500",
+    electronics: "border-violet-500",
+    homeAndLiving: "border-green-500",
+    beauty: "border-yellow-500",
+  };
 
-const Menu: React.FC<MenuProps> = ({
-  showCatMenu,
-  setShowCatMenu,
-  categories,
-}) => {
   return (
-    <ul className="hidden md:flex items-center gap-8 font-medium text-black">
-      {data.map((item: MenuItem) => {
-        return (
-          <React.Fragment key={item.id}>
-            {!!item?.subMenu ? (
+    <ul className="hidden md:flex items-center gap-3 font-medium text-black">
+      {categories
+        ?.filter((c) => c.attributes.name !== "Sale")
+        .map((c, id) => {
+          const categoryColorClass = categoryColors[c.attributes.slug];
+          return (
+            <Link key={id} href={`/category/${c.attributes.slug}`}>
               <li
-                className="cursor-pointer flex items-center gap-2 relative"
-                onMouseEnter={() => setShowCatMenu(true)}
-                onMouseLeave={() => setShowCatMenu(false)}
+                className={`h-12 font-semibold flex justify-between items-center px-3 hover:border-b-2 ${categoryColorClass}`}
               >
-                {item.name}
-                <BsChevronDown size={14} />
-
-                {showCatMenu && (
-                  <ul className="bg-white absolute top-6 left-0 min-w-[250px] px-1 py-1 text-black shadow-lg">
-                    {categories?.map((c, id) => {
-                      return (
-                        <Link
-                          key={id}
-                          href={`/category/${c.attributes.slug}`}
-                          onClick={() => setShowCatMenu(false)}
-                        >
-                          <li className="h-12 flex justify-between items-center px-3 hover:bg-black/[0.03] rounded-md">
-                            {c.attributes.name}
-                            <span className="opacity-50 text-sm">
-                              {`(${
-                                Object.keys(c.attributes.products.data).length
-                              })`}
-                            </span>
-                          </li>
-                        </Link>
-                      );
-                    })}
-                  </ul>
-                )}
+                {c.attributes.name.toUpperCase()}
               </li>
-            ) : (
-              <li className="cursor-pointer">
-                {item.url && <Link href={item.url}>{item.name}</Link>}
-              </li>
-            )}
-          </React.Fragment>
-        );
-      })}
+            </Link>
+          );
+        })}
     </ul>
   );
 };

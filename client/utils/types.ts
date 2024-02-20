@@ -1,11 +1,4 @@
-export interface MenuItem {
-  id: number;
-  name: string;
-  url?: string;
-  subMenu?: boolean;
-}
-
-export interface Category {
+export interface CategoryMenu {
   id: number;
   attributes: {
     name: string;
