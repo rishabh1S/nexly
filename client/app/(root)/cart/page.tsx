@@ -1,7 +1,7 @@
 /* eslint-disable @next/next/no-img-element */
 
 "use client";
-import React, { useMemo, useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { Wrapper, CartItem } from "@/components";
@@ -15,11 +15,30 @@ const stripePromise = loadStripe(
 
 const Cart = () => {
   const [loading, setLoading] = useState(false);
+  const [shippingCost, setShippingCost] = useState(100);
   const { cartItems } = useSelector((state: RootState) => state.cart);
 
-  const subTotal = useMemo(() => {
-    return cartItems.reduce((total, val) => total + val.attributes.price, 0);
+  const totalMRP = useMemo(() => {
+    return cartItems.reduce(
+      (total, val) => total + val.attributes.original_price,
+      0
+    );
   }, [cartItems]);
+
+  const subTotal = useMemo(() => {
+    return (
+      cartItems.reduce((total, val) => total + val.attributes.price, 0) +
+      shippingCost
+    );
+  }, [cartItems, shippingCost]);
+
+  useEffect(() => {
+    if (subTotal > 800) {
+      setShippingCost(0);
+    } else {
+      setShippingCost(100);
+    }
+  }, [subTotal]);
 
   const handlePayment = async () => {
     try {
@@ -27,6 +46,7 @@ const Cart = () => {
       const stripe = await stripePromise;
       const res = await makePaymentRequest("/api/orders", {
         products: cartItems,
+        shippingCost: shippingCost,
       });
       await stripe?.redirectToCheckout({
         sessionId: res.stripeSession.id,
@@ -58,23 +78,51 @@ const Cart = () => {
                   />
                 ))}
               </div>
-              <div className="flex-[1]">
-                <div className="text-lg font-bold">Summary</div>
+              <div className="flex-1">
+                <div className="text-lg font-bold">Price Details</div>
 
                 <div className="p-5 my-5 bg-black/[0.05] rounded-xl">
-                  <div className="flex justify-between">
-                    <div className="uppercase text-md md:text-lg font-medium text-black">
+                  <div className="flex flex-col gap-2">
+                    <div className="flex justify-between">
+                      <div className="text-md md:text-lg font-medium text-black">
+                        Total MRP
+                      </div>
+                      <div className="text-md md:text-lg font-medium text-black">
+                        &#8377;{totalMRP}
+                      </div>
+                    </div>
+                    <div className="flex justify-between">
+                      <div className="text-md md:text-lg font-medium text-black">
+                        Discount on MRP
+                      </div>
+                      <div className="text-md md:text-lg font-medium text-green-500">
+                        -&#8377;{totalMRP - subTotal + shippingCost}
+                      </div>
+                    </div>
+                    <div className="flex justify-between">
+                      <div className="text-md md:text-lg font-medium text-black">
+                        Shipping Cost
+                      </div>
+                      <div className="text-md md:text-lg font-medium text-black">
+                        {subTotal > 800 ? (
+                          <span className="text-green-500">FREE</span>
+                        ) : (
+                          `₹${shippingCost}`
+                        )}
+                      </div>
+                    </div>
+                  </div>
+                  <div className="border-t border-zinc-300 mt-3 pt-3 flex justify-between">
+                    <div className="text-md md:text-lg font-semibold text-black">
                       Subtotal
                     </div>
-                    <div className="text-md md:text-lg font-medium text-black">
+                    <div className="text-md md:text-lg font-semibold text-black">
                       &#8377;{subTotal}
                     </div>
                   </div>
-                  <div className="text-sm md:text-md py-5 border-t mt-5">
-                    The subtotal reflects the total price of your order,
-                    including duties and taxes, before any applicable discounts.
-                    It does not include delivery costs and international
-                    transaction fees.
+                  <div className="text-sm md:text-md py-3">
+                    The subtotal reflects the total price of your order, you
+                    need to pay including duties and taxes.
                   </div>
                 </div>
                 <button

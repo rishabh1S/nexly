@@ -44,8 +44,13 @@ const CartItem: React.FC<CartItemProps> = ({ data, selectedSize }) => {
           <div className="text-sm md:text-md font-medium text-black/[0.5] block md:hidden">
             {data.subtitle}
           </div>
-          <div className="text-sm md:text-md font-bold text-black/[0.5] mt-2">
-            MRP : &#8377;{p.price}
+          <div className="flex gap-2">
+            <p className="text-sm md:text-md font-bold text-black/[0.9] mt-2">
+              &#8377;{p?.price}
+            </p>
+            <p className="text-sm md:text-md font-bold text-black/[0.5] line-through mt-2">
+              MRP: &#8377;{p?.original_price}
+            </p>
           </div>
         </div>
         <div className="text-md font-medium text-black/[0.5] hidden md:block">

@@ -8,7 +8,7 @@ const { createCoreController } = require("@strapi/strapi").factories;
 
 module.exports = createCoreController("api::order.order", ({ strapi }) => ({
   async create(ctx) {
-    const { products } = ctx.request.body;
+    const { products, shippingCost } = ctx.request.body;
     try {
       const lineItems = await Promise.all(
         products.map(async (product) => {
@@ -31,6 +31,19 @@ module.exports = createCoreController("api::order.order", ({ strapi }) => ({
           };
         })
       );
+
+      if (shippingCost > 0) {
+        lineItems.push({
+          price_data: {
+            currency: "inr",
+            product_data: {
+              name: "Shipping Cost",
+            },
+            unit_amount: Math.round(shippingCost * 100),
+          },
+          quantity: 1,
+        });
+      }
 
       const session = await stripe.checkout.sessions.create({
         shipping_address_collection: { allowed_countries: ["IN"] },

@@ -68,15 +68,15 @@ const ProductDetails: React.FC = () => {
             <div className="text-[34px] font-semibold mb-2 leading-tight">
               {p?.name}
             </div>
-            <div className="text-lg font-semibold mb-5">{p?.subtitle}</div>
+            <div className="text-xl leading-6 font-medium mb-5">
+              {p?.subtitle}
+            </div>
             <div className="flex items-center">
-              <p className="mr-2 text-lg font-semibold">
-                MRP : &#8377;{p?.price}
-              </p>
+              <p className="mr-2 text-lg font-bold">&#8377;{p?.price}</p>
               {p?.original_price && (
                 <>
-                  <p className="text-base  font-medium line-through">
-                    &#8377;{p?.original_price}
+                  <p className="text-base font-medium line-through">
+                    MRP : &#8377;{p?.original_price}
                   </p>
                   <p className="ml-auto text-base font-medium text-green-500">
                     {getDiscountedPricePercentage(p?.original_price, p?.price)}%
@@ -148,9 +148,11 @@ const ProductDetails: React.FC = () => {
                       name: product?.data?.[0].attributes.name,
                       subtitle: product?.data?.[0].attributes.subtitle,
                       quantity: 1,
+                      oneQuantityOriginalPrice: p.original_price,
                       oneQuantityPrice: p.price,
                       attributes: {
                         price: p.price,
+                        original_price: p.original_price,
                         selectedSize: selectedSize,
                         thumbnail: p.thumbnail?.data.attributes.url,
                         size: {

@@ -17,8 +17,8 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
       className="transform overflow-hidden duration-200 cursor-pointer flex flex-col justify-between items-center border bg-gray-100"
     >
       <Image
-        width={300}
-        height={300}
+        width={288}
+        height={384}
         src={p.thumbnail?.data.attributes.url}
         alt={p.name}
         className="w-72 h-96"

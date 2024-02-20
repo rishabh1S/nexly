@@ -6,9 +6,11 @@ interface CartItem {
   name: string;
   subtitle: string;
   quantity: number;
+  oneQuantityOriginalPrice: number;
   oneQuantityPrice: number;
   attributes: {
     price: number;
+    original_price: number;
     selectedSize: string;
     thumbnail: string;
     size: {
@@ -36,6 +38,8 @@ export const cartSlice = createSlice({
       const item = state.cartItems.find((p) => p.id === action.payload.id);
       if (item) {
         item.quantity++;
+        item.attributes.original_price =
+          item.oneQuantityOriginalPrice * item.quantity;
         item.attributes.price = item.oneQuantityPrice * item.quantity;
       } else {
         state.cartItems.push({ ...action.payload, quantity: 1 });
@@ -48,6 +52,8 @@ export const cartSlice = createSlice({
       state.cartItems = state.cartItems.map((p) => {
         if (p.id === action.payload.id) {
           if (action.payload.key === "quantity") {
+            p.attributes.original_price =
+              p.oneQuantityOriginalPrice * Number(action.payload.val);
             p.attributes.price =
               p.oneQuantityPrice * Number(action.payload.val);
           }
