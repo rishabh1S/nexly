@@ -6,7 +6,6 @@ import {
   Wrapper,
   ProductDetailsCarousel,
   RelatedProducts,
-  Announcement,
   Loading,
 } from "@/components";
 import { fetchDataFromApi } from "@/utils/api";
@@ -33,23 +32,22 @@ const ProductDetails: React.FC = () => {
   const { slug } = useParams();
 
   useEffect(() => {
+    const fetchData = async (productSlug: string) => {
+      const productData = await fetchDataFromApi(
+        `/api/products?populate=*&filters[slug][$eq]=${productSlug}`
+      );
+      const otherProducts = await fetchDataFromApi(
+        `/api/products?populate=*&[filters][slug][$ne]=${productSlug}`
+      );
+
+      setProduct(productData);
+      setProducts(otherProducts);
+    };
+
     if (slug) {
       fetchData(slug.toString());
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
-
-  const fetchData = async (productSlug: string) => {
-    const productData = await fetchDataFromApi(
-      `/api/products?populate=*&filters[slug][$eq]=${productSlug}`
-    );
-    const otherProducts = await fetchDataFromApi(
-      `/api/products?populate=*&[filters][slug][$ne]=${productSlug}`
-    );
-
-    setProduct(productData);
-    setProducts(otherProducts);
-  };
+  }, [slug]);
 
   if (!product || !products) {
     return <Loading />;
@@ -58,7 +56,6 @@ const ProductDetails: React.FC = () => {
   const p = product?.data?.[0]?.attributes;
   return (
     <div className="w-full min-h-screen">
-      <Announcement />
       <Wrapper className="md:py-16 py-4">
         <div className="flex flex-col lg:flex-row gap-[50px] lg:gap-[100px]">
           <div className="w-full md:w-auto flex-[1.5] max-w-[500px] lg:max-w-full mx-auto lg:mx-0">

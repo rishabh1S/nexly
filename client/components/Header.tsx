@@ -1,5 +1,5 @@
 /* eslint-disable @next/next/no-img-element */
-/* eslint-disable react-hooks/exhaustive-deps */
+
 "use client";
 
 import React, { useState, useEffect } from "react";
@@ -18,51 +18,56 @@ import { RootState } from "@/store/store";
 
 const Header = () => {
   const [mobileMenu, setMobileMenu] = useState(false);
-  const [showCatMenu, setShowCatMenu] = useState(false);
   const [userMenuOpen, setUserMenuOpen] = useState(false);
   const [show, setShow] = useState("translate-y-0");
   const [lastScrollY, setLastScrollY] = useState(0);
   const [categories, setCategories] = useState<CategoryMenu[]>([]);
-  const [full_name, setFullName] = useState("");
-  const [avatar_url, setAvatarUrl] = useState("");
   const { cartItems } = useSelector((state: RootState) => state.cart);
   const { wishlistItems } = useSelector((state: RootState) => state.wishlist);
 
-  const controlNavbar = () => {
-    if (window.scrollY > 200) {
-      if (window.scrollY > lastScrollY && !mobileMenu) {
-        setShow("-translate-y-[80px]");
-      } else {
-        setShow("shadow-sm");
-      }
-    } else {
-      setShow("translate-y-0");
-    }
-    setLastScrollY(window.scrollY);
-  };
   useEffect(() => {
+    const controlNavbar = () => {
+      const scrollY = window.scrollY;
+      if (scrollY > 200) {
+        setShow(
+          scrollY > lastScrollY && !mobileMenu
+            ? "-translate-y-[80px]"
+            : "shadow-sm"
+        );
+      } else {
+        setShow("translate-y-0 shadow-sm");
+      }
+      setLastScrollY(scrollY);
+    };
+
     window.addEventListener("scroll", controlNavbar);
     return () => {
       window.removeEventListener("scroll", controlNavbar);
     };
-  }, [lastScrollY]);
+  }, [lastScrollY, mobileMenu]);
 
   useEffect(() => {
+    const fetchCategories = async () => {
+      const { data } = await fetchDataFromApi("/api/categories?populate=*");
+      setCategories(data);
+    };
+
     fetchCategories();
   }, []);
 
-  const fetchCategories = async () => {
-    const { data } = await fetchDataFromApi("/api/categories?populate=*");
-    setCategories(data);
-  };
-
   return (
     <div
-      className={`w-full h-[50px] md:h-[80px] bg-white flex items-center justify-between z-50 sticky top-0 transition-transform duration-300 ${show}`}
+      className={`w-full h-12 md:h-20 bg-white flex items-center justify-between z-50 sticky top-0 transition-transform duration-300 ${show}`}
     >
-      <Wrapper className="h-[60px] flex justify-between items-center">
+      <Wrapper className="h-14 flex justify-between items-center">
         <Link href="/" className="flex justify-center items-center gap-2">
-          <Image width={45} height={45} src="/logo.png" alt="nexly logo" />
+          <Image
+            width={40}
+            height={40}
+            src="/logo.png"
+            alt="nexly logo"
+            className="sm:h-10 h-7 sm:w-10 w-8"
+          />
         </Link>
         <Menu categories={categories} />
 
@@ -98,19 +103,11 @@ const Header = () => {
             onMouseEnter={() => setUserMenuOpen(true)}
             onMouseLeave={() => setUserMenuOpen(false)}
           >
-            {avatar_url ? (
-              <img
-                src={avatar_url}
-                alt="User Avatar"
-                className="w-10 h-10 rounded-full"
-              />
-            ) : (
-              <AiOutlineUser className="text-[19px] md:text-[24px]" />
-            )}
+            <AiOutlineUser className="text-[19px] md:text-[24px]" />
             {userMenuOpen && (
               <div className="bg-white absolute top-11 right-0 min-w-[160px] px-1 py-1 text-black shadow-lg">
                 <div className="block px-4 py-2 hover:bg-black/[0.03] rounded-md">
-                  {full_name || "Profile"}
+                  Profile
                 </div>
                 <Link
                   href="/contact"
