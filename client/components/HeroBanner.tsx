@@ -2,64 +2,88 @@
 
 "use client";
 import React from "react";
-import Link from "next/link";
 import "react-responsive-carousel/lib/styles/carousel.min.css";
 import { Carousel } from "react-responsive-carousel";
 import { CarouselItem } from "../utils/types";
+import { useRouter } from "next/navigation";
 
 const subMenuData: CarouselItem[] = [
   {
     id: 1,
     imgSrc:
-      "https://res.cloudinary.com/dnp36kqdc/image/upload/v1698698098/SupaBazaar%20E-commerce/slide-1.png",
+      "https://res.cloudinary.com/dnp36kqdc/image/upload/v1708530555/SupaBazaar%20E-commerce/slide1.webp",
     alt: "Carousel 1",
   },
   {
     id: 2,
     imgSrc:
-      "https://res.cloudinary.com/dnp36kqdc/image/upload/v1698697979/SupaBazaar%20E-commerce/slide-2.png",
+      "https://res.cloudinary.com/dnp36kqdc/image/upload/v1708530437/SupaBazaar%20E-commerce/slide2.webp",
     alt: "Carousel 2",
   },
   {
     id: 3,
     imgSrc:
-      "https://res.cloudinary.com/dnp36kqdc/image/upload/v1697549100/SupaBazaar%20E-commerce/slide-3.png",
+      "https://res.cloudinary.com/dnp36kqdc/image/upload/v1708530438/SupaBazaar%20E-commerce/slide3.webp",
     alt: "Carousel 3",
+  },
+  {
+    id: 4,
+    imgSrc:
+      "https://res.cloudinary.com/dnp36kqdc/image/upload/v1708530437/SupaBazaar%20E-commerce/slide4.webp",
+    alt: "Carousel 4",
+  },
+  {
+    id: 5,
+    imgSrc:
+      "https://res.cloudinary.com/dnp36kqdc/image/upload/v1708530438/SupaBazaar%20E-commerce/slide5.webp",
+    alt: "Carousel 5",
   },
 ];
 
-const HeroBanner = () => {
+const renderCustomIndicator = (
+  onClickHandler: React.MouseEventHandler<HTMLDivElement>,
+  isSelected: boolean,
+  index: React.Key
+) => {
   return (
-    <div className="relative text-white bg-gradient-to-r from-purple-200 to-violet-600 text-[20px] w-full max-w-[1000px] mx-auto z-0">
-      <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-br from-purple-200 via-violet-600 -z-10" />
-      <Carousel
-        autoPlay={true}
-        infiniteLoop={true}
-        showThumbs={false}
-        showArrows={false}
-        showIndicators={false}
-        showStatus={false}
-      >
-        {subMenuData.map((item, index) => (
-          <div key={item.id}>
-            <img
-              src={item.imgSrc}
-              alt={item.alt}
-              className="aspect-[16/10] md:aspect-auto object-cover"
-            />
-            <h1 className="text-7xl sm:text-[150px] font-bold leading-none text-white absolute left-[20px] sm:bottom-[200px] bottom-[150px] -z-10">
-              SALES
-            </h1>
-            <Link
-              className="px-[15px] md:px-[40px] py-[10px] md:py-[25px] font-oswald bg-white absolute bottom-[25px] md:bottom-[75px] left-0 text-black/[0.9] text-[15px] md:text-[30px] uppercase font-medium cursor-pointer hover:opacity-90"
-              href="/category/sale"
-            >
-              Shop now
-            </Link>
-          </div>
-        ))}
-      </Carousel>
-    </div>
+    <div
+      key={index}
+      onClick={onClickHandler}
+      style={{
+        background: isSelected ? "#7E808B" : "#DEDEE1",
+        width: 7,
+        height: 7,
+        display: "inline-block",
+        margin: "0 6px",
+        cursor: "pointer",
+        borderRadius: "50%",
+      }}
+    />
+  );
+};
+
+const HeroBanner = () => {
+  const router = useRouter();
+  return (
+    <Carousel
+      autoPlay={true}
+      infiniteLoop={true}
+      showThumbs={false}
+      showArrows={false}
+      showIndicators={true}
+      showStatus={false}
+      renderIndicator={renderCustomIndicator}
+    >
+      {subMenuData.map((item) => (
+        <div
+          key={item.id}
+          onClick={() => router.push("/category/sale")}
+          className="cursor-pointer sm:py-10 py-3"
+        >
+          <img src={item.imgSrc} alt={item.alt} />
+        </div>
+      ))}
+    </Carousel>
   );
 };
 

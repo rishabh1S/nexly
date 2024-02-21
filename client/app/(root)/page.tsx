@@ -36,7 +36,7 @@ export default function Home() {
           <Loading />
         ) : (
           <div>
-            <div className="text-center max-w-[800px] mx-auto my-10 md:my-14">
+            <div className="text-center max-w-[800px] mx-auto my-8 md:my-12">
               <div className="text-[30px] md:text-[40px] mb-5 font-semibold leading-tight">
                 Experience Exceptional Style and Unrivaled Quality
               </div>

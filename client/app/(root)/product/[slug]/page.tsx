@@ -62,31 +62,28 @@ const ProductDetails: React.FC = () => {
             <ProductDetailsCarousel images={p?.image?.data} />
           </div>
           <div className="flex-[1] py-3">
-            <div className="text-[34px] font-semibold mb-2 leading-tight">
+            <div className="text-[34px] font-semibold mb-1 leading-tight">
               {p?.name}
             </div>
-            <div className="text-xl leading-6 font-medium mb-5">
+            <div className="text-xl text-black/[0.5] font-medium pb-1.5">
               {p?.subtitle}
             </div>
-            <div className="flex items-center">
-              <p className="mr-2 text-lg font-bold">&#8377;{p?.price}</p>
+            <div className="my-2 flex items-center">
+              <p className="mr-2 text-2xl font-bold">&#8377;{p?.price}</p>
               {p?.original_price && (
                 <>
-                  <p className="text-base font-medium line-through">
-                    MRP : &#8377;{p?.original_price}
+                  <p className="text-xl text-black/[0.6] font-medium line-through">
+                    MRP &#8377;{p?.original_price}
                   </p>
-                  <p className="ml-auto text-base font-medium text-green-500">
+                  <p className="ml-auto text-xl font-semibold text-green-500">
                     {getDiscountedPricePercentage(p?.original_price, p?.price)}%
                     off
                   </p>
                 </>
               )}
             </div>
-            <div className="text-md font-medium text-black/[0.5]">
-              incl. of taxes
-            </div>
-            <div className="text-md font-medium text-black/[0.5] mb-20">
-              {`(Also includes all applicable duties)`}
+            <div className="text-sm font-bold text-indigo-500 mb-20">
+              inclusive of all taxes
             </div>
 
             <div className="mb-10">
@@ -106,8 +103,8 @@ const ProductDetails: React.FC = () => {
                           className={`border rounded-md text-center py-3 font-medium ${
                             item.enabled
                               ? selectedSize === item.size
-                                ? "border-black"
-                                : "hover:border-black cursor-pointer"
+                                ? "border-indigo-500 text-indigo-500"
+                                : "hover:border-indigo-500 cursor-pointer"
                               : "cursor-not-allowed bg-black/[0.1] opacity-50"
                           }`}
                           onClick={() => {
@@ -135,7 +132,7 @@ const ProductDetails: React.FC = () => {
               )}
             </div>
             <button
-              className="w-full py-4 rounded-full bg-violet-600 text-white text-lg font-medium transition-transform active:scale-95 mb-3 hover:opacity-75"
+              className="w-full py-4 rounded-full bg-indigo-600 hover:bg-indigo-500 text-white text-lg font-medium transition-transform mb-3"
               onClick={() => {
                 if (selectedSize) {
                   dispatch(

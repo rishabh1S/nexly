@@ -35,7 +35,7 @@ const Header = () => {
             : "shadow-sm"
         );
       } else {
-        setShow("translate-y-0 shadow-sm");
+        setShow("translate-y-0 shadow-[0_4px_12px_rgb(0,0,0,0.05)]");
       }
       setLastScrollY(scrollY);
     };
