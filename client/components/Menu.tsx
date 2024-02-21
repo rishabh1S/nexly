@@ -11,7 +11,6 @@ const Menu: React.FC<MenuProps> = ({ categories }) => {
     men: "border-red-500",
     women: "border-pink-400",
     kids: "border-orange-500",
-    electronics: "border-violet-500",
     homeAndLiving: "border-green-500",
     beauty: "border-yellow-500",
   };

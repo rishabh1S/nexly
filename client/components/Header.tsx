@@ -1,24 +1,21 @@
-/* eslint-disable @next/next/no-img-element */
-
 "use client";
 
-import React, { useState, useEffect } from "react";
-import { Menu, MenuMobile, Wrapper } from ".";
-import Link from "next/link";
-import Image from "next/image";
-import { CategoryMenu } from "../utils/types";
-import { IoMdHeartEmpty } from "react-icons/io";
-import { BsCart } from "react-icons/bs";
-import { BiMenuAltRight } from "react-icons/bi";
-import { VscChromeClose } from "react-icons/vsc";
-import { AiOutlineUser } from "react-icons/ai";
-import { fetchDataFromApi } from "@/utils/api";
-import { useSelector } from "react-redux";
 import { RootState } from "@/store/store";
+import { fetchDataFromApi } from "@/utils/api";
+import { SignInButton, SignedOut, UserButton } from "@clerk/nextjs";
+import Image from "next/image";
+import Link from "next/link";
+import React, { useEffect, useState } from "react";
+import { BiMenuAltRight } from "react-icons/bi";
+import { BsCart } from "react-icons/bs";
+import { IoMdHeartEmpty } from "react-icons/io";
+import { VscChromeClose } from "react-icons/vsc";
+import { useSelector } from "react-redux";
+import { Menu, MenuMobile, Wrapper } from ".";
+import { CategoryMenu } from "../utils/types";
 
 const Header = () => {
   const [mobileMenu, setMobileMenu] = useState(false);
-  const [userMenuOpen, setUserMenuOpen] = useState(false);
   const [show, setShow] = useState("translate-y-0");
   const [lastScrollY, setLastScrollY] = useState(0);
   const [categories, setCategories] = useState<CategoryMenu[]>([]);
@@ -98,39 +95,11 @@ const Header = () => {
             </div>
           </Link>
 
-          <div
-            className="w-8 md:w-12 h-8 md:h-12 rounded-full hidden md:flex justify-center items-center cursor-pointer relative"
-            onMouseEnter={() => setUserMenuOpen(true)}
-            onMouseLeave={() => setUserMenuOpen(false)}
-          >
-            <AiOutlineUser className="text-[19px] md:text-[24px]" />
-            {userMenuOpen && (
-              <div className="bg-white absolute top-11 right-0 min-w-[160px] px-1 py-1 text-black shadow-lg">
-                <div className="block px-4 py-2 hover:bg-black/[0.03] rounded-md">
-                  Profile
-                </div>
-                <Link
-                  href="/contact"
-                  className="block px-4 py-2 hover:bg-black/[0.03] rounded-md"
-                  onClick={() => {
-                    setUserMenuOpen(false);
-                  }}
-                >
-                  Contact
-                </Link>
-                <Link
-                  href="/login"
-                  className="block px-4 py-2 hover:bg-black/[0.03] rounded-md"
-                  onClick={() => {
-                    setUserMenuOpen(false);
-                  }}
-                >
-                  Sign Out
-                </Link>
-              </div>
-            )}
-          </div>
+          <UserButton afterSignOutUrl="/" />
 
+          <SignedOut>
+            <SignInButton mode="modal" />
+          </SignedOut>
           <div className="w-8 md:w-12 h-8 md:h-12 rounded-full flex md:hidden justify-center items-center hover:bg-black/[0.05] cursor-pointer relative -mr-2">
             {mobileMenu ? (
               <VscChromeClose

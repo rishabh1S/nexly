@@ -20,14 +20,39 @@ const WishlistItem: React.FC<WishlistItemProps> = ({ data }) => {
     dispatch(removeFromWishlist(data.id));
   };
 
+  const handleMoveToCart = () => {
+    dispatch(
+      addToCart({
+        id: data.id,
+        slug: data.slug,
+        name: data.name,
+        subtitle: data.subtitle,
+        quantity: 1,
+        oneQuantityOriginalPrice: p.original_price,
+        oneQuantityPrice: p.price,
+        attributes: {
+          price: p.price,
+          original_price: p.original_price,
+          selectedSize: "",
+          thumbnail: p.thumbnail,
+          size: {
+            data: p.size.data,
+          },
+        },
+      })
+    );
+    dispatch(removeFromWishlist(data.id));
+    toast.success("Success. Check your cart!");
+  };
+
   return (
     <div className="flex flex-col items-center">
       <div className="relative h-full">
         <button
           onClick={handleRemoveFromWishlist}
-          className="absolute top-2 right-2 bg-zinc-200 rounded-full"
+          className="absolute p-1 top-2 right-2 bg-zinc-200 rounded-full"
         >
-          <MdClose size={22} />
+          <MdClose size={18} />
         </button>
         <Link
           href={`/product/${data.slug}`}
@@ -55,30 +80,7 @@ const WishlistItem: React.FC<WishlistItemProps> = ({ data }) => {
           </div>
         </Link>
         <button
-          onClick={() => {
-            dispatch(
-              addToCart({
-                id: data.id,
-                slug: data.slug,
-                name: data.name,
-                subtitle: data.subtitle,
-                quantity: 1,
-                oneQuantityOriginalPrice: p.original_price,
-                oneQuantityPrice: p.price,
-                attributes: {
-                  price: p.price,
-                  original_price: p.original_price,
-                  selectedSize: "",
-                  thumbnail: p.thumbnail,
-                  size: {
-                    data: p.size.data,
-                  },
-                },
-              })
-            );
-            dispatch(removeFromWishlist(data.id));
-            toast.success("Success. Check your cart!");
-          }}
+          onClick={handleMoveToCart}
           className="w-full py-3 text-violet-600 text-lg font-medium border border-t-0"
         >
           Move to Cart
