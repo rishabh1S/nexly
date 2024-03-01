@@ -2,7 +2,7 @@
 
 Welcome to Nexly, an incredible e-commerce project built with Next.js, TypeScript, Strapi, Stripe, and Clerk Auth. This repository contains the source code and setup instructions to help you get started with your own e-commerce website.
 
-<img src="https://res.cloudinary.com/dnp36kqdc/image/upload/v1708551058/CDN%20for%20portfolio/Nexly.png" width="800">
+<img src="https://res.cloudinary.com/dnp36kqdc/image/upload/v1709292447/CDN%20for%20portfolio/Nexly_gif.gif" width="800">
 
 ## Table of Contents
 
@@ -126,6 +126,8 @@ Before you begin, ensure you have the following software and accounts set up:
 ## Deployment
 
 You can deploy the front-end and back-end separately. We recommend using platforms like Vercel for the Next.js app (client) and dedicated hosting for your Strapi(server).
+
+<img src="https://res.cloudinary.com/dnp36kqdc/image/upload/v1708551058/CDN%20for%20portfolio/Nexly.png" width="600">
 
 ## License
 
